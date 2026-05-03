@@ -1,0 +1,274 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "CyVerse Data Science Workflow"
+  description: >-
+    Unified workflow capability for bioinformatics and data science on the CyVerse
+    Discovery Environment. Enables researchers, bioinformaticians, and data scientists
+    to manage data in iRODS, discover and launch analysis applications, monitor jobs,
+    annotate datasets with metadata, share data with collaborators, and request
+    persistent identifiers for publication-ready datasets.
+  tags:
+    - CyVerse
+    - Bioinformatics
+    - Data Science
+    - iRODS
+    - Life Sciences
+    - Research Computing
+    - Open Science
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TERRAIN_JWT_TOKEN: TERRAIN_JWT_TOKEN
+
+capability:
+  consumes:
+    - import: terrain
+      location: ./shared/terrain.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: cyverse-data-science-api
+      description: "Unified REST API for CyVerse Discovery Environment data science workflows."
+      resources:
+        - path: /v1/filesystem
+          name: filesystem
+          description: "iRODS data store browsing"
+          operations:
+            - method: GET
+              name: list-directory
+              description: "List directory contents in iRODS"
+              call: "terrain.list-directory"
+              with:
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/filesystem/root
+          name: filesystem-root
+          description: "User root directory"
+          operations:
+            - method: GET
+              name: get-root-directory
+              description: "Get user's root iRODS directory"
+              call: "terrain.get-root-directory"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/filesystem/search
+          name: filesystem-search
+          description: "Search data store"
+          operations:
+            - method: GET
+              name: search-filesystem
+              description: "Search iRODS for files and directories"
+              call: "terrain.search-filesystem"
+              with:
+                search: "rest.search"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/filesystem/metadata
+          name: metadata
+          description: "File metadata (AVUs)"
+          operations:
+            - method: GET
+              name: get-file-metadata
+              description: "Get AVU metadata for a path"
+              call: "terrain.get-file-metadata"
+              with:
+                path: "rest.path"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/apps
+          name: apps
+          description: "Application discovery"
+          operations:
+            - method: GET
+              name: list-apps
+              description: "Browse available bioinformatics apps"
+              call: "terrain.list-apps"
+              with:
+                search: "rest.search"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/analyses
+          name: analyses
+          description: "Analysis job management"
+          operations:
+            - method: GET
+              name: list-analyses
+              description: "List user's analysis jobs"
+              call: "terrain.list-analyses"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: submit-analysis
+              description: "Submit a new analysis job"
+              call: "terrain.submit-analysis"
+              with:
+                name: "rest.name"
+                app_id: "rest.app_id"
+                system_id: "rest.system_id"
+                config: "rest.config"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/notifications
+          name: notifications
+          description: "User notifications"
+          operations:
+            - method: GET
+              name: list-notifications
+              description: "List user notifications"
+              call: "terrain.list-notifications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: cyverse-data-science-mcp
+      transport: http
+      description: "MCP server for AI-assisted CyVerse Discovery Environment data science workflows."
+      tools:
+        - name: list-directory
+          description: "Browse an iRODS directory in the CyVerse data store"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "terrain.list-directory"
+          with:
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-root-directory
+          description: "Get the root directory structure for the CyVerse user account"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "terrain.get-root-directory"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-file-stats
+          description: "Get size, permissions, and modification dates for an iRODS file or directory"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "terrain.get-file-stats"
+          with:
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-filesystem
+          description: "Search the CyVerse iRODS data store for files and folders by name"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "terrain.search-filesystem"
+          with:
+            search: "tools.search"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: move-files
+          description: "Move files or directories to a new location in iRODS"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "terrain.move-files"
+          with:
+            sources: "tools.sources"
+            dest: "tools.dest"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-files
+          description: "Move files or directories to the user's iRODS trash"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: false
+          call: "terrain.delete-files"
+          with:
+            paths: "tools.paths"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-file-metadata
+          description: "Get iRODS AVU metadata triples for a file or directory"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "terrain.get-file-metadata"
+          with:
+            path: "tools.path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: share-data
+          description: "Share iRODS data (files/folders) with other CyVerse users"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "terrain.share-data"
+          with:
+            sharing: "tools.sharing"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-apps
+          description: "Browse bioinformatics and data science apps in the Discovery Environment"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "terrain.list-apps"
+          with:
+            search: "tools.search"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-analyses
+          description: "List the user's analysis job history in the Discovery Environment"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "terrain.list-analyses"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: submit-analysis
+          description: "Submit a new bioinformatics analysis job using a Discovery Environment application"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "terrain.submit-analysis"
+          with:
+            name: "tools.name"
+            app_id: "tools.app_id"
+            system_id: "tools.system_id"
+            config: "tools.config"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-notifications
+          description: "Get recent notifications about completed analyses and system events"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "terrain.list-notifications"
+          outputParameters:
+            - type: object
+              mapping: "$."

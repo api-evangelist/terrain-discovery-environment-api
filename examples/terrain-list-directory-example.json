@@ -1,0 +1,56 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://de.cyverse.org/terrain/secured/filesystem/directory?path=/iplant/home/myuser&limit=50&offset=0",
+    "headers": {
+      "Authorization": "Bearer <TERRAIN_JWT_TOKEN>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "path": "/iplant/home/myuser",
+      "date-created": "1640000000000",
+      "date-modified": "1746000000000",
+      "permission": "own",
+      "folders": [
+        {
+          "id": "afc62f7c-abcd-1234-efgh-5678ijklmnop",
+          "path": "/iplant/home/myuser/analyses",
+          "label": "analyses",
+          "date-created": "1640000000000",
+          "date-modified": "1746000000000",
+          "file-size": 0,
+          "permission": "own",
+          "file-type": null
+        },
+        {
+          "id": "bde73a8d-wxyz-5678-abcd-1234efghijkl",
+          "path": "/iplant/home/myuser/rawdata",
+          "label": "rawdata",
+          "date-created": "1643000000000",
+          "date-modified": "1745000000000",
+          "file-size": 0,
+          "permission": "own",
+          "file-type": null
+        }
+      ],
+      "files": [
+        {
+          "id": "cef84b9e-1234-abcd-5678-efghijklmnop",
+          "path": "/iplant/home/myuser/sample.fastq",
+          "label": "sample.fastq",
+          "date-created": "1745000000000",
+          "date-modified": "1745000000000",
+          "file-size": 52428800,
+          "permission": "own",
+          "file-type": "fastq"
+        }
+      ],
+      "total": 3
+    }
+  }
+}

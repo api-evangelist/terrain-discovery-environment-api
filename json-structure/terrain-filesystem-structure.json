@@ -1,0 +1,62 @@
+{
+  "title": "Terrain Filesystem Object Structure",
+  "description": "JSON structure documentation for iRODS filesystem objects in the CyVerse Discovery Environment",
+  "type": "object",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "Unique iRODS data object or collection ID"
+    },
+    {
+      "name": "path",
+      "type": "string",
+      "description": "Full iRODS logical path (e.g., /iplant/home/username/mydata)"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Display name (last segment of path)"
+    },
+    {
+      "name": "date-created",
+      "type": "string (Unix timestamp ms)",
+      "description": "Creation timestamp in milliseconds since epoch"
+    },
+    {
+      "name": "date-modified",
+      "type": "string (Unix timestamp ms)",
+      "description": "Last modification timestamp in milliseconds since epoch"
+    },
+    {
+      "name": "file-size",
+      "type": "integer",
+      "description": "File size in bytes (0 for directories)"
+    },
+    {
+      "name": "permission",
+      "type": "string",
+      "description": "Access permission for the current user: read, write, or own"
+    },
+    {
+      "name": "file-type",
+      "type": "string",
+      "description": "MIME type or DE-detected file type (e.g., text/plain, image/png)"
+    },
+    {
+      "name": "folders",
+      "type": "array of FileSystemObject",
+      "description": "Sub-directories when listing a directory (only in directory listing response)"
+    },
+    {
+      "name": "files",
+      "type": "array of FileSystemObject",
+      "description": "Files when listing a directory (only in directory listing response)"
+    },
+    {
+      "name": "total",
+      "type": "integer",
+      "description": "Total count of objects in directory (for pagination)"
+    }
+  ]
+}

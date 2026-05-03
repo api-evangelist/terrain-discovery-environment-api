@@ -1,0 +1,95 @@
+extends: spectral:oas
+rules:
+  terrain-operation-ids-present:
+    description: All operations must have operationId defined
+    message: "Operation at {{path}} is missing operationId"
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  terrain-operation-id-pascal-case:
+    description: Operation IDs should use PascalCase
+    message: "Operation ID '{{value}}' should use PascalCase"
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9]+$"
+
+  terrain-secured-paths:
+    description: Authenticated endpoints should be under /secured prefix
+    message: "Authenticated endpoints should use /secured path prefix"
+    severity: info
+    given: "$.paths"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  terrain-tags-required:
+    description: Each operation should have at least one tag
+    message: "Operation at {{path}} should have at least one tag"
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  terrain-parameter-descriptions:
+    description: Parameters should have descriptions
+    message: "Parameter is missing a description"
+    severity: warn
+    given: "$.paths..parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  terrain-json-responses:
+    description: Endpoints should return application/json responses
+    message: "Response should use application/json content type"
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete].responses.*.content"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            "application/json":
+              type: object
+
+  terrain-jwt-auth:
+    description: Terrain uses JWT bearer token or X-Iplant-De-Jwt header authentication
+    message: "Security schemes should use bearer JWT or apiKey header"
+    severity: info
+    given: "$.components.securitySchemes.*"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - properties:
+                type:
+                  const: http
+                scheme:
+                  const: bearer
+            - properties:
+                type:
+                  const: apiKey
+                in:
+                  const: header
+
+  terrain-kebab-path-params:
+    description: Path parameter names should use kebab-case
+    message: "Path parameter '{{value}}' should use kebab-case"
+    severity: warn
+    given: "$.paths..parameters[?(@.in == 'path')].name"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9-]+$"

@@ -1,0 +1,116 @@
+title: Terrain Discovery Environment Vocabulary
+description: >-
+  Vocabulary and taxonomy for the CyVerse Terrain Discovery Environment API covering
+  iRODS filesystem semantics, bioinformatics application management, analysis job
+  lifecycle, metadata annotation, and open science data sharing concepts.
+created: '2026-05-03'
+modified: '2026-05-03'
+
+domains:
+  - name: Data Storage
+    description: iRODS-based distributed data storage concepts
+    terms:
+      - name: iRODS
+        definition: >-
+          Integrated Rule-Oriented Data System — the distributed data management
+          platform underlying CyVerse's storage infrastructure
+      - name: Data Object
+        definition: A file stored in iRODS, uniquely identified by its logical path
+      - name: Collection
+        definition: An iRODS directory container analogous to a filesystem folder
+      - name: Logical Path
+        definition: The human-readable path to a file or collection in iRODS (e.g., /iplant/home/username/data)
+      - name: Zone
+        definition: An iRODS administrative domain — CyVerse uses the iplant zone
+      - name: Home Directory
+        definition: The default personal data storage location for each CyVerse user (/iplant/home/username)
+      - name: Community Data
+        definition: Shared data accessible to all CyVerse users (/iplant/home/shared)
+      - name: Trash
+        definition: Temporary holding area for deleted files before permanent removal
+
+  - name: Metadata
+    description: Data annotation and discovery concepts
+    terms:
+      - name: AVU
+        definition: >-
+          Attribute-Value-Unit triple — the fundamental metadata unit in iRODS
+          for annotating files and collections
+      - name: Attribute
+        definition: The name/key of a metadata field in an AVU triple
+      - name: Value
+        definition: The data content of a metadata field
+      - name: Unit
+        definition: An optional measurement unit associated with a metadata value
+      - name: Schema
+        definition: A structured template defining required metadata fields for a dataset type
+      - name: Ontology
+        definition: A controlled vocabulary namespace for semantic metadata terms
+
+  - name: Application Management
+    description: Bioinformatics application discovery and lifecycle
+    terms:
+      - name: App
+        definition: A bioinformatics tool or workflow packaged for execution in the Discovery Environment
+      - name: App Type
+        definition: Execution category — DE (containerized), Tapis (HPC via TACC), Interactive (Jupyter/RStudio)
+      - name: App Version
+        definition: A specific version of an application's configuration and container image
+      - name: Tool
+        definition: A Docker container image registered in the Discovery Environment for app use
+      - name: Pipeline
+        definition: A multi-step workflow composed of multiple apps connected in sequence
+      - name: Quick Launch
+        definition: A saved app configuration allowing one-click job submission with pre-filled parameters
+      - name: App Category
+        definition: A thematic grouping used to browse apps (e.g., Genomics, Imaging, Statistical)
+
+  - name: Analysis Lifecycle
+    description: Job submission, execution, and monitoring
+    terms:
+      - name: Analysis
+        definition: A single job execution instance of an application with specific input data and parameters
+      - name: Job Submission
+        definition: The act of configuring and sending an analysis to an execution system
+      - name: Execution System
+        definition: The compute backend running a job — DE (local containers) or Tapis (HPC clusters)
+      - name: Analysis Status
+        definition: >-
+          Current state: Submitted (queued), Running (executing),
+          Completed (success), Failed (error), or Canceled (user-terminated)
+      - name: Result Folder
+        definition: The iRODS directory where output files from a completed analysis are stored
+      - name: Job Parameters
+        definition: The configuration settings, input file paths, and tool flags passed to an analysis
+
+  - name: Access and Sharing
+    description: Permissions, sharing, and access control
+    terms:
+      - name: Permission
+        definition: The level of access a user has to an iRODS object — read, write, or own
+      - name: Sharing
+        definition: Granting another user access to a file or collection with a specified permission level
+      - name: Ticket
+        definition: An anonymous access token allowing unauthenticated download of a specific iRODS path
+      - name: DOI
+        definition: >-
+          Digital Object Identifier — a permanent identifier assigned to a published
+          dataset for citation and long-term accessibility
+      - name: ARK
+        definition: >-
+          Archival Resource Key — an alternative permanent identifier format for
+          datasets requiring long-term archival access
+
+  - name: Authentication
+    description: Authentication mechanisms for API access
+    terms:
+      - name: Keycloak
+        definition: The OAuth2/OIDC identity provider used by CyVerse for user authentication
+      - name: JWT
+        definition: >-
+          JSON Web Token — a signed bearer token containing user identity claims,
+          used to authenticate Terrain API calls
+      - name: X-Iplant-De-Jwt
+        definition: The custom HTTP header used to pass JWT tokens to Terrain endpoints
+      - name: Bearer Token
+        definition: An OAuth2 access token passed in the Authorization header for API authentication
