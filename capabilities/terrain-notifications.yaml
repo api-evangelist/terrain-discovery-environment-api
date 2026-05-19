@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Terrain Discovery Environment API — Notifications
+  description: 'Terrain Discovery Environment API — Notifications. 2 operations. Lead operation: List Notifications. Self-contained
+    Naftiko capability covering one Terrain Discovery Environment Api business surface.'
+  tags:
+  - Terrain Discovery Environment Api
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY: TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: terrain-notifications
+    baseUri: https://de.cyverse.org/terrain
+    description: Terrain Discovery Environment API — Notifications business capability. Self-contained, no shared references.
+    resources:
+    - name: secured-notifications
+      path: /secured/notifications
+      operations:
+      - name: listnotifications
+        method: GET
+        description: List Notifications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum notifications to return
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+        - name: seen
+          in: query
+          type: boolean
+          description: Filter by read/unread status
+    - name: secured-notifications-mark-all-seen
+      path: /secured/notifications/mark-all-seen
+      operations:
+      - name: markallnotificationsseen
+        method: POST
+        description: Mark All Notifications Seen
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: terrain-notifications-rest
+    port: 8080
+    description: REST adapter for Terrain Discovery Environment API — Notifications. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/secured/notifications
+      name: secured-notifications
+      description: REST surface for secured-notifications.
+      operations:
+      - method: GET
+        name: listnotifications
+        description: List Notifications
+        call: terrain-notifications.listnotifications
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          seen: rest.seen
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/notifications/mark-all-seen
+      name: secured-notifications-mark-all-seen
+      description: REST surface for secured-notifications-mark-all-seen.
+      operations:
+      - method: POST
+        name: markallnotificationsseen
+        description: Mark All Notifications Seen
+        call: terrain-notifications.markallnotificationsseen
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: terrain-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Terrain Discovery Environment API — Notifications. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-notifications
+      description: List Notifications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-notifications.listnotifications
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        seen: tools.seen
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mark-all-notifications-seen
+      description: Mark All Notifications Seen
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: terrain-notifications.markallnotificationsseen
+      outputParameters:
+      - type: object
+        mapping: $.

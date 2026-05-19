@@ -1,0 +1,183 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Terrain Discovery Environment API — Apps
+  description: 'Terrain Discovery Environment API — Apps. 3 operations. Lead operation: List Apps. Self-contained Naftiko
+    capability covering one Terrain Discovery Environment Api business surface.'
+  tags:
+  - Terrain Discovery Environment Api
+  - Apps
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY: TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: terrain-apps
+    baseUri: https://de.cyverse.org/terrain
+    description: Terrain Discovery Environment API — Apps business capability. Self-contained, no shared references.
+    resources:
+    - name: secured-apps
+      path: /secured/apps
+      operations:
+      - name: listapps
+        method: GET
+        description: List Apps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Filter apps by name or description
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of apps to return
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+        - name: sort-field
+          in: query
+          type: string
+          description: Field to sort by
+        - name: sort-dir
+          in: query
+          type: string
+          description: Sort direction
+    - name: secured-apps-categories
+      path: /secured/apps/categories
+      operations:
+      - name: listappcategories
+        method: GET
+        description: List App Categories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: secured-apps-app-id
+      path: /secured/apps/{app-id}
+      operations:
+      - name: getapp
+        method: GET
+        description: Get App
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: app-id
+          in: path
+          type: string
+          description: The application UUID
+          required: true
+        - name: system-id
+          in: query
+          type: string
+          description: The app system (e.g., de, tapis)
+    authentication:
+      type: bearer
+      token: '{{env.TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: terrain-apps-rest
+    port: 8080
+    description: REST adapter for Terrain Discovery Environment API — Apps. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/secured/apps
+      name: secured-apps
+      description: REST surface for secured-apps.
+      operations:
+      - method: GET
+        name: listapps
+        description: List Apps
+        call: terrain-apps.listapps
+        with:
+          search: rest.search
+          limit: rest.limit
+          offset: rest.offset
+          sort-field: rest.sort-field
+          sort-dir: rest.sort-dir
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/apps/categories
+      name: secured-apps-categories
+      description: REST surface for secured-apps-categories.
+      operations:
+      - method: GET
+        name: listappcategories
+        description: List App Categories
+        call: terrain-apps.listappcategories
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/apps/{app-id}
+      name: secured-apps-app-id
+      description: REST surface for secured-apps-app-id.
+      operations:
+      - method: GET
+        name: getapp
+        description: Get App
+        call: terrain-apps.getapp
+        with:
+          app-id: rest.app-id
+          system-id: rest.system-id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: terrain-apps-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Terrain Discovery Environment API — Apps. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-apps
+      description: List Apps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-apps.listapps
+      with:
+        search: tools.search
+        limit: tools.limit
+        offset: tools.offset
+        sort-field: tools.sort-field
+        sort-dir: tools.sort-dir
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-app-categories
+      description: List App Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-apps.listappcategories
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-app
+      description: Get App
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-apps.getapp
+      with:
+        app-id: tools.app-id
+        system-id: tools.system-id
+      outputParameters:
+      - type: object
+        mapping: $.

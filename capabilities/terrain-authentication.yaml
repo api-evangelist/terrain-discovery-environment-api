@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Terrain Discovery Environment API — Authentication
+  description: 'Terrain Discovery Environment API — Authentication. 1 operations. Lead operation: Get Keycloak Token. Self-contained
+    Naftiko capability covering one Terrain Discovery Environment Api business surface.'
+  tags:
+  - Terrain Discovery Environment Api
+  - Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY: TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: terrain-authentication
+    baseUri: https://de.cyverse.org/terrain
+    description: Terrain Discovery Environment API — Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: token-keycloak
+      path: /token/keycloak
+      operations:
+      - name: getkeycloaktoken
+        method: GET
+        description: Get Keycloak Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: terrain-authentication-rest
+    port: 8080
+    description: REST adapter for Terrain Discovery Environment API — Authentication. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/token/keycloak
+      name: token-keycloak
+      description: REST surface for token-keycloak.
+      operations:
+      - method: GET
+        name: getkeycloaktoken
+        description: Get Keycloak Token
+        call: terrain-authentication.getkeycloaktoken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: terrain-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Terrain Discovery Environment API — Authentication. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-keycloak-token
+      description: Get Keycloak Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-authentication.getkeycloaktoken
+      outputParameters:
+      - type: object
+        mapping: $.

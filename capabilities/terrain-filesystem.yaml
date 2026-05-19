@@ -1,0 +1,480 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Terrain Discovery Environment API — Filesystem
+  description: 'Terrain Discovery Environment API — Filesystem. 10 operations. Lead operation: Delete Files. Self-contained
+    Naftiko capability covering one Terrain Discovery Environment Api business surface.'
+  tags:
+  - Terrain Discovery Environment Api
+  - Filesystem
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY: TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: terrain-filesystem
+    baseUri: https://de.cyverse.org/terrain
+    description: Terrain Discovery Environment API — Filesystem business capability. Self-contained, no shared references.
+    resources:
+    - name: secured-filesystem-delete
+      path: /secured/filesystem/delete
+      operations:
+      - name: deletefiles
+        method: POST
+        description: Delete Files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: secured-filesystem-delete-contents
+      path: /secured/filesystem/delete-contents
+      operations:
+      - name: emptytrash
+        method: POST
+        description: Empty Trash
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: secured-filesystem-directory
+      path: /secured/filesystem/directory
+      operations:
+      - name: listdirectory
+        method: GET
+        description: List Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: The iRODS path of the directory to list
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of entries to return
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+        - name: sort-col
+          in: query
+          type: string
+          description: Column to sort by (name, size, date-created, date-modified)
+        - name: sort-dir
+          in: query
+          type: string
+          description: Sort direction
+    - name: secured-filesystem-directory-create
+      path: /secured/filesystem/directory/create
+      operations:
+      - name: createdirectory
+        method: POST
+        description: Create Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: secured-filesystem-exists
+      path: /secured/filesystem/exists
+      operations:
+      - name: checkpathexists
+        method: GET
+        description: Check Path Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: iRODS path to check
+          required: true
+    - name: secured-filesystem-move
+      path: /secured/filesystem/move
+      operations:
+      - name: movefiles
+        method: POST
+        description: Move Files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: secured-filesystem-rename
+      path: /secured/filesystem/rename
+      operations:
+      - name: renamefile
+        method: POST
+        description: Rename File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: secured-filesystem-root
+      path: /secured/filesystem/root
+      operations:
+      - name: getrootdirectory
+        method: GET
+        description: Get Root Directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: secured-filesystem-search
+      path: /secured/filesystem/search
+      operations:
+      - name: searchfilesystem
+        method: GET
+        description: Search Filesystem
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Search query string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum results to return
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset
+        - name: type
+          in: query
+          type: string
+          description: Filter by object type
+    - name: secured-filesystem-stat
+      path: /secured/filesystem/stat
+      operations:
+      - name: getfilestats
+        method: GET
+        description: Get File Stats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: iRODS path of the file or directory
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TERRAIN_DISCOVERY_ENVIRONMENT_API_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: terrain-filesystem-rest
+    port: 8080
+    description: REST adapter for Terrain Discovery Environment API — Filesystem. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/secured/filesystem/delete
+      name: secured-filesystem-delete
+      description: REST surface for secured-filesystem-delete.
+      operations:
+      - method: POST
+        name: deletefiles
+        description: Delete Files
+        call: terrain-filesystem.deletefiles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/delete-contents
+      name: secured-filesystem-delete-contents
+      description: REST surface for secured-filesystem-delete-contents.
+      operations:
+      - method: POST
+        name: emptytrash
+        description: Empty Trash
+        call: terrain-filesystem.emptytrash
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/directory
+      name: secured-filesystem-directory
+      description: REST surface for secured-filesystem-directory.
+      operations:
+      - method: GET
+        name: listdirectory
+        description: List Directory
+        call: terrain-filesystem.listdirectory
+        with:
+          path: rest.path
+          limit: rest.limit
+          offset: rest.offset
+          sort-col: rest.sort-col
+          sort-dir: rest.sort-dir
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/directory/create
+      name: secured-filesystem-directory-create
+      description: REST surface for secured-filesystem-directory-create.
+      operations:
+      - method: POST
+        name: createdirectory
+        description: Create Directory
+        call: terrain-filesystem.createdirectory
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/exists
+      name: secured-filesystem-exists
+      description: REST surface for secured-filesystem-exists.
+      operations:
+      - method: GET
+        name: checkpathexists
+        description: Check Path Exists
+        call: terrain-filesystem.checkpathexists
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/move
+      name: secured-filesystem-move
+      description: REST surface for secured-filesystem-move.
+      operations:
+      - method: POST
+        name: movefiles
+        description: Move Files
+        call: terrain-filesystem.movefiles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/rename
+      name: secured-filesystem-rename
+      description: REST surface for secured-filesystem-rename.
+      operations:
+      - method: POST
+        name: renamefile
+        description: Rename File
+        call: terrain-filesystem.renamefile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/root
+      name: secured-filesystem-root
+      description: REST surface for secured-filesystem-root.
+      operations:
+      - method: GET
+        name: getrootdirectory
+        description: Get Root Directory
+        call: terrain-filesystem.getrootdirectory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/search
+      name: secured-filesystem-search
+      description: REST surface for secured-filesystem-search.
+      operations:
+      - method: GET
+        name: searchfilesystem
+        description: Search Filesystem
+        call: terrain-filesystem.searchfilesystem
+        with:
+          search: rest.search
+          limit: rest.limit
+          offset: rest.offset
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/secured/filesystem/stat
+      name: secured-filesystem-stat
+      description: REST surface for secured-filesystem-stat.
+      operations:
+      - method: GET
+        name: getfilestats
+        description: Get File Stats
+        call: terrain-filesystem.getfilestats
+        with:
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: terrain-filesystem-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Terrain Discovery Environment API — Filesystem. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: delete-files
+      description: Delete Files
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: terrain-filesystem.deletefiles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: empty-trash
+      description: Empty Trash
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: terrain-filesystem.emptytrash
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-directory
+      description: List Directory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-filesystem.listdirectory
+      with:
+        path: tools.path
+        limit: tools.limit
+        offset: tools.offset
+        sort-col: tools.sort-col
+        sort-dir: tools.sort-dir
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-directory
+      description: Create Directory
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: terrain-filesystem.createdirectory
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-path-exists
+      description: Check Path Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-filesystem.checkpathexists
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: move-files
+      description: Move Files
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: terrain-filesystem.movefiles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-file
+      description: Rename File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: terrain-filesystem.renamefile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-root-directory
+      description: Get Root Directory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-filesystem.getrootdirectory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-filesystem
+      description: Search Filesystem
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-filesystem.searchfilesystem
+      with:
+        search: tools.search
+        limit: tools.limit
+        offset: tools.offset
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-file-stats
+      description: Get File Stats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: terrain-filesystem.getfilestats
+      with:
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
