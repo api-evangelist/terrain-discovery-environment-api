@@ -1,49 +1,63 @@
-# Terrain Discovery Environment API
+# Terrain Discovery Environment API (terrain-discovery-environment-api)
 
-Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench. Terrain validates user authentication via Keycloak/JWT and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
 
-**Type:** Company  
-**Portal:** https://cyverse.org/Science-APIs  
-**Documentation:** https://docs.cyverse.org/services/api_overview/  
-**GitHub:** https://github.com/cyverse-de/terrain  
-**Discovery Environment:** https://de.cyverse.org  
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Bioinformatics
+- Data Science
+- Life Sciences
+- Filesystem
+- Cloud Computing
+- Open Source
+
+## Timestamps
+
+- **Created:** 2026-03-16
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Terrain API
-The main REST entry-point for the CyVerse Discovery Environment. Handles JWT authentication and coordinates calls to iRODS filesystem, app execution, analysis jobs, metadata, and notification services.
 
+The Terrain API is the main entry-point REST service for the CyVerse Discovery Environment. It handles authentication via Keycloak JWT tokens and orchestrates calls to backend services for filesystem management, app execution, data analysis, metadata, notifications, and more.
+
+- **Human URL:** [https://cyverse.org/Science-APIs](https://cyverse.org/Science-APIs)
 - **Base URL:** `https://de.cyverse.org/terrain`
-- **Authentication:** Keycloak Bearer JWT / X-Iplant-De-Jwt header
-- **Documentation:** https://docs.cyverse.org/services/api_overview/
-- **OpenAPI Spec:** [openapi/terrain-openapi.yml](openapi/terrain-openapi.yml)
 
-## Artifacts
+#### Tags
 
-| Type | Files |
-|------|-------|
-| OpenAPI Specs | [openapi/](openapi/) |
-| Spectral Rules | [rules/terrain-rules.yml](rules/terrain-rules.yml) |
-| Capabilities | [capabilities/](capabilities/) |
-| JSON Schema | [json-schema/](json-schema/) |
-| JSON Structure | [json-structure/](json-structure/) |
-| JSON-LD | [json-ld/terrain-discovery-environment-api-context.jsonld](json-ld/terrain-discovery-environment-api-context.jsonld) |
-| Examples | [examples/](examples/) |
-| Vocabulary | [vocabulary/terrain-vocabulary.yml](vocabulary/terrain-vocabulary.yml) |
+- Bioinformatics
+- Filesystem
+- Data Analysis
+- Applications
+- Notifications
 
-## Capabilities
+#### Properties
 
-### Workflow Capabilities
-- **[data-science-workflow.yaml](capabilities/data-science-workflow.yaml)** — Unified workflow for CyVerse bioinformatics and data science: filesystem management, app discovery, job submission, metadata, sharing, and notifications (12 tools)
+- [Documentation](https://docs.cyverse.org/services/api_overview/)
+- [Swagger U I](https://de.cyverse.org/terrain/docs)
+- [Repository](https://github.com/cyverse-de/terrain)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/openapi/terrain-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/terrain.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/terrain.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-### Shared Per-API Definitions
-- **[shared/terrain.yaml](capabilities/shared/terrain.yaml)** — Terrain API: filesystem, apps, analyses, metadata, sharing, notifications (12 tools)
+## Common Properties
 
-## Tags
-
-Bioinformatics, Data Science, Life Sciences, Filesystem, iRODS, Cloud Computing, Open Source, CyVerse, Research Computing, Open Science
+- [Portal](https://cyverse.org/Science-APIs)
+- [Documentation](https://docs.cyverse.org)
+- [Repository](https://github.com/cyverse-de/terrain)
+- [Portal](https://de.cyverse.org)
+- [Webinar](https://cyverse.org/webinar_TerrainAPI)
+- [Authentication](https://docs.cyverse.org/services/getting_started/)
 
 ## Maintainers
 
-**FN:** Kin Lane  
+**FN:** Kin Lane
 **Email:** kin@apievangelist.com

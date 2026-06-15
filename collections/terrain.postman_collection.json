@@ -1,0 +1,2922 @@
+{
+  "item": [
+    {
+      "id": "0f358a7e-328d-453f-808d-feaec401ba35",
+      "name": "Authentication",
+      "description": {
+        "content": "Token and authentication management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "acf4cdb3-b51d-4435-b008-eaaa20c70a5e",
+          "name": "Get Keycloak Token",
+          "request": {
+            "name": "Get Keycloak Token",
+            "description": {
+              "content": "Obtain an OAuth access token from Keycloak for authenticating with Terrain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token",
+                "keycloak"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50cde9be-7f1d-4d38-8c0c-892ef25a28f7",
+              "name": "Authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token",
+                    "keycloak"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"string\",\n  \"expires_in\": 3072,\n  \"refresh_token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "50f9e1d3-0353-4039-b2d5-4601ba0c8cb3",
+      "name": "Filesystem",
+      "description": {
+        "content": "iRODS filesystem operations - browse, create, move, delete files and directories",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f74c3bb5-702b-477e-a851-f54a02675cdd",
+          "name": "List Directory",
+          "request": {
+            "name": "List Directory",
+            "description": {
+              "content": "Lists the contents of a directory in the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "directory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) The iRODS path of the directory to list"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of entries to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-col",
+                  "value": "<string>",
+                  "description": "Column to sort by (name, size, date-created, date-modified)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-dir",
+                  "value": "<string>",
+                  "description": "Sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "581fb54a-2ae7-4484-84cf-d890c2ca0aaa",
+              "name": "Directory listing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "directory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort-col",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"permission\": \"string\",\n  \"folders\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 6566,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 7622,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"files\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 189,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 193,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"total\": 8546\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6afb21c-901b-4106-b6ea-18e74ca91555",
+          "name": "Create Directory",
+          "request": {
+            "name": "Create Directory",
+            "description": {
+              "content": "Creates a new directory in the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "directory",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d86670d-dd65-4ce5-88ae-e63b3e278c32",
+              "name": "Directory created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "directory",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"path\": \"string\",\n  \"label\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"file-size\": 7204,\n  \"permission\": \"string\",\n  \"file-type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74ef2eb2-23a7-4de9-a4fc-17762e2135fd",
+          "name": "Get Root Directory",
+          "request": {
+            "name": "Get Root Directory",
+            "description": {
+              "content": "Returns the root directory listing for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "root"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65f2c1a8-31c3-492e-a634-865e318651f2",
+              "name": "Root directory contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "root"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"roots\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 8055,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 4025,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca1dcd8f-25ff-4d8c-a8e2-6d68bcac11c2",
+          "name": "Get File Stats",
+          "request": {
+            "name": "Get File Stats",
+            "description": {
+              "content": "Returns metadata and statistics for one or more files or directories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "stat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) iRODS path of the file or directory"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db8dd941-a88d-4d1a-8b62-db8f6b648845",
+              "name": "File or directory statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "stat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"type\": \"dir\",\n  \"permission\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"file-size\": 1765\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a6a3a8f-99e0-454a-b9cd-9cfdf114c14b",
+          "name": "Check Path Exists",
+          "request": {
+            "name": "Check Path Exists",
+            "description": {
+              "content": "Checks whether one or more paths exist in iRODS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "exists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) iRODS path to check"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf777be3-6efc-4c3e-a09d-83dcf580a5c1",
+              "name": "Existence check result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "exists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paths\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44e641af-1db0-483b-8c96-8153c451ca04",
+          "name": "Move Files",
+          "request": {
+            "name": "Move Files",
+            "description": {
+              "content": "Moves one or more files or directories to a new location in iRODS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "move"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dest\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1e6f051-9850-4ad1-a6ce-a2025ea973d5",
+              "name": "Move completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dest\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sources\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dest\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa81b729-1f71-47dc-8126-96acd0f4f734",
+          "name": "Rename File",
+          "request": {
+            "name": "Rename File",
+            "description": {
+              "content": "Renames a file or directory in iRODS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "rename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"dest\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e68bd7d7-705f-4d38-b02b-22db22eba2b0",
+              "name": "Rename completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "rename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"dest\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"path\": \"string\",\n  \"label\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"file-size\": 7204,\n  \"permission\": \"string\",\n  \"file-type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "934ec1b7-8dc5-4e15-b06e-5c1f0e1ed1dc",
+          "name": "Delete Files",
+          "request": {
+            "name": "Delete Files",
+            "description": {
+              "content": "Moves one or more files or directories to the user's trash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d758d0fc-02df-433f-9052-78e4d671072d",
+              "name": "Files moved to trash",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paths\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6914a0c8-c4d0-41d8-9872-db7fc18d4d10",
+          "name": "Empty Trash",
+          "request": {
+            "name": "Empty Trash",
+            "description": {
+              "content": "Permanently deletes all items in the user's trash directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "delete-contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a77917b8-7103-4045-887b-98ceab12fe23",
+              "name": "Trash emptied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "delete-contents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b14b835-753b-4736-9bc6-d6c8d049902b",
+          "name": "Search Filesystem",
+          "request": {
+            "name": "Search Filesystem",
+            "description": {
+              "content": "Performs a full-text search across the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by object type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c296ee1-461d-45eb-9ffa-13b7f5a48eb8",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"matches\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 2905,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 4061,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"total\": 5739,\n  \"offset\": 3972\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6d51a6f5-2142-4429-935d-56597b2d1d5a",
+      "name": "Apps",
+      "description": {
+        "content": "Application metadata, discovery, and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "db0d2bfa-e5c7-4686-9f43-aff9517ecef4",
+          "name": "List Apps",
+          "request": {
+            "name": "List Apps",
+            "description": {
+              "content": "Lists available applications in the Discovery Environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter apps by name or description"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of apps to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-field",
+                  "value": "<string>",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-dir",
+                  "value": "<string>",
+                  "description": "Sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8daa093-47b0-4376-81b9-2d521aa0cbca",
+              "name": "List of apps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort-field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apps\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"wiki_url\": \"string\",\n      \"integration_date\": \"string\",\n      \"edited_date\": \"string\",\n      \"app_type\": \"string\",\n      \"system_id\": \"string\",\n      \"disabled\": false,\n      \"deleted\": false,\n      \"pipeline_eligibility\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"wiki_url\": \"string\",\n      \"integration_date\": \"string\",\n      \"edited_date\": \"string\",\n      \"app_type\": \"string\",\n      \"system_id\": \"string\",\n      \"disabled\": false,\n      \"deleted\": true,\n      \"pipeline_eligibility\": {}\n    }\n  ],\n  \"total\": 8305,\n  \"offset\": 5766\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2499474f-3df8-47f3-b214-5d8d5007b5b4",
+          "name": "Get App",
+          "request": {
+            "name": "Get App",
+            "description": {
+              "content": "Returns details for a specific application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "apps",
+                ":app-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "system-id",
+                  "value": "<string>",
+                  "description": "The app system (e.g., de, tapis)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app-id",
+                  "description": "(Required) The application UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "932387e6-d722-4716-ba72-f427edca576c",
+              "name": "Application details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "apps",
+                    ":app-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "system-id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app-id",
+                      "description": "(Required) The application UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"wiki_url\": \"string\",\n  \"integration_date\": \"string\",\n  \"edited_date\": \"string\",\n  \"app_type\": \"string\",\n  \"system_id\": \"string\",\n  \"disabled\": true,\n  \"deleted\": false,\n  \"pipeline_eligibility\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f2aa79b-04cb-4a6e-9e48-c2e346d5e234",
+          "name": "List App Categories",
+          "request": {
+            "name": "List App Categories",
+            "description": {
+              "content": "Returns a list of application categories for browsing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "apps",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75531f21-fcd4-490c-bccc-1a38090a7b3d",
+              "name": "App categories",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "apps",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"app_count\": 709\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"app_count\": 4924\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e8f82c35-3fdb-48da-88f8-6c997c2d23e8",
+      "name": "Analyses",
+      "description": {
+        "content": "Job submission, monitoring, and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f842f33-d3a6-4e7f-830e-9db3772b1bdf",
+          "name": "List Analyses",
+          "request": {
+            "name": "List Analyses",
+            "description": {
+              "content": "Lists job analyses (runs) for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of analyses to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-field",
+                  "value": "<string>",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "JSON filter expression"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "339248a0-2718-4974-9363-8497766c4cc2",
+              "name": "List of analyses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort-field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analyses\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"app_id\": \"string\",\n      \"app_name\": \"string\",\n      \"status\": \"Submitted\",\n      \"start_date\": \"string\",\n      \"end_date\": \"string\",\n      \"result_folder_path\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"app_id\": \"string\",\n      \"app_name\": \"string\",\n      \"status\": \"Failed\",\n      \"start_date\": \"string\",\n      \"end_date\": \"string\",\n      \"result_folder_path\": \"string\"\n    }\n  ],\n  \"total\": 4585,\n  \"offset\": 8411\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ab8bcc7-0043-448a-9101-50b101bd1f45",
+          "name": "Submit Analysis",
+          "request": {
+            "name": "Submit Analysis",
+            "description": {
+              "content": "Submits a new analysis job for execution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"system_id\": \"<string>\",\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"output_dir\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d48d25d8-f68c-4fa2-bbe2-26bc8b3eb751",
+              "name": "Analysis submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"system_id\": \"<string>\",\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"output_dir\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"app_id\": \"string\",\n  \"app_name\": \"string\",\n  \"status\": \"Submitted\",\n  \"start_date\": \"string\",\n  \"end_date\": \"string\",\n  \"result_folder_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "665898a9-f930-4019-bccc-f184f67b9c00",
+          "name": "Get Analysis",
+          "request": {
+            "name": "Get Analysis",
+            "description": {
+              "content": "Returns details and status for a specific analysis job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses",
+                ":analysis-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analysis-id",
+                  "description": "(Required) The analysis UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06ff36fd-e322-4ac5-82f8-c859240f2fdf",
+              "name": "Analysis details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses",
+                    ":analysis-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analysis-id",
+                      "description": "(Required) The analysis UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"app_id\": \"string\",\n  \"app_name\": \"string\",\n  \"status\": \"Submitted\",\n  \"start_date\": \"string\",\n  \"end_date\": \"string\",\n  \"result_folder_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ade1b5cf-42fa-4d9a-8f7a-c16e0a0e9f78",
+          "name": "Delete Analysis",
+          "request": {
+            "name": "Delete Analysis",
+            "description": {
+              "content": "Deletes a completed analysis from the user's history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses",
+                ":analysis-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analysis-id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0c4f17c-fd85-4ec5-9ddf-a38def979d7b",
+              "name": "Analysis deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses",
+                    ":analysis-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analysis-id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c5b2402-4f95-49be-ba55-e30ce11bcde8",
+          "name": "Stop Analysis",
+          "request": {
+            "name": "Stop Analysis",
+            "description": {
+              "content": "Stops a running analysis job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses",
+                ":analysis-id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analysis-id",
+                  "description": "(Required) The analysis UUID"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d74b91c-fd77-4cdd-af19-02c3836a84dc",
+              "name": "Analysis stopped",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses",
+                    ":analysis-id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analysis-id",
+                      "description": "(Required) The analysis UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "336aee67-8ef5-4f62-a5b0-900e2eb46928",
+      "name": "Metadata",
+      "description": {
+        "content": "File and data metadata annotation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ac53a3f-74a7-4067-9dc4-a9916e9866bc",
+          "name": "Get File Metadata",
+          "request": {
+            "name": "Get File Metadata",
+            "description": {
+              "content": "Returns metadata AVU (attribute-value-unit) triples for a file or directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) iRODS path of the object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e1a3140-45f8-4f1f-99c2-9ca15522be62",
+              "name": "File metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"avus\": [\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    },\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    }\n  ],\n  \"irods-avus\": [\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    },\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d50c458-5efd-40cc-a00b-46934889695e",
+          "name": "Set File Metadata",
+          "request": {
+            "name": "Set File Metadata",
+            "description": {
+              "content": "Sets metadata AVU triples on a file or directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"avus\": [\n    {\n      \"attr\": \"<string>\",\n      \"value\": \"<string>\",\n      \"unit\": \"<string>\"\n    },\n    {\n      \"attr\": \"<string>\",\n      \"value\": \"<string>\",\n      \"unit\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d83d4369-4d5e-43cc-b9cf-2700da18a6a7",
+              "name": "Metadata set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"avus\": [\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    },\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7445e13b-96f3-4b91-83fa-d7105b82d6cd",
+      "name": "Notifications",
+      "description": {
+        "content": "User notification management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94c2fc0f-1dd8-4fc3-a1dc-8d8e738c5537",
+          "name": "List Notifications",
+          "request": {
+            "name": "List Notifications",
+            "description": {
+              "content": "Returns a list of notifications for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum notifications to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "seen",
+                  "value": "<boolean>",
+                  "description": "Filter by read/unread status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7bf2a254-b306-401d-b889-afee4437a8a9",
+              "name": "User notifications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "seen",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"subject\": \"string\",\n      \"seen\": true,\n      \"deleted\": true,\n      \"timestamp\": \"string\",\n      \"message\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"subject\": \"string\",\n      \"seen\": false,\n      \"deleted\": false,\n      \"timestamp\": \"string\",\n      \"message\": {}\n    }\n  ],\n  \"total\": 3387\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae44dc76-d28e-40b3-ac4d-5d19492f4f03",
+          "name": "Mark All Notifications Seen",
+          "request": {
+            "name": "Mark All Notifications Seen",
+            "description": {
+              "content": "Marks all notifications as read for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "notifications",
+                "mark-all-seen"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1057efc9-11cf-4d7e-ab26-bcb878292006",
+              "name": "Notifications marked as seen",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "notifications",
+                    "mark-all-seen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "855fed4e-1333-4283-bb33-36cde6ae422a",
+      "name": "Sharing",
+      "description": {
+        "content": "Data sharing and permissions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "529623df-b3d7-43e8-aadc-ffe877950e20",
+          "name": "Share Data with Users",
+          "request": {
+            "name": "Share Data with Users",
+            "description": {
+              "content": "Shares files or directories with specified users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "share"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6112d1f-41f2-44e8-b17f-82631057cb02",
+              "name": "Sharing completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "share"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3620f04-e14a-4804-9df6-1747c0dec324",
+          "name": "Unshare Data",
+          "request": {
+            "name": "Unshare Data",
+            "description": {
+              "content": "Removes sharing permissions for specified users on files or directories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "unshare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unsharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1363cda-9ac1-4d32-8a82-812ea4fdb513",
+              "name": "Unsharing completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "unshare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unsharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7d768090-144c-4cbb-b0c7-caeb0d7af8bc",
+      "name": "Search",
+      "description": {
+        "content": "Full-text search across data and apps",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cca9d8bc-0714-4dcb-ac41-31669d349771",
+          "name": "Search Filesystem",
+          "request": {
+            "name": "Search Filesystem",
+            "description": {
+              "content": "Performs a full-text search across the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by object type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cc70b2e-4150-4652-9342-3ae3012552a9",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"matches\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 67,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 1050,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"total\": 5803,\n  \"offset\": 6422\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "508c0c15-f1a0-4e5f-8042-68cea9e3442d",
+      "name": "Identifiers",
+      "description": {
+        "content": "Permanent identifier (DOI) requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a47d671-ce69-4025-b840-808b95d63901",
+          "name": "List Permanent Id Requests",
+          "request": {
+            "name": "List Permanent Id Requests",
+            "description": {
+              "content": "Lists all permanent identifier (DOI) requests for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "permanent-id-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48604604-91f1-4a9b-855a-b0a99a2fcfae",
+              "name": "List of permanent ID requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "permanent-id-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requests\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"type\": \"string\",\n      \"requested_by\": \"string\",\n      \"date_submitted\": \"string\",\n      \"status\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"type\": \"string\",\n      \"requested_by\": \"string\",\n      \"date_submitted\": \"string\",\n      \"status\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb69409a-047e-49e7-9f8b-557d1db00cfe",
+          "name": "Create Permanent Id Request",
+          "request": {
+            "name": "Create Permanent Id Request",
+            "description": {
+              "content": "Submits a request to assign a DOI or other permanent identifier to a dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "permanent-id-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2de3dca5-4401-4645-be3b-5b3c73e9a296",
+              "name": "Permanent ID request submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "permanent-id-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"path\": \"string\",\n  \"type\": \"string\",\n  \"requested_by\": \"string\",\n  \"date_submitted\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "689e4f5a-1f75-4abd-97a8-b2480af302b6",
+    "name": "Terrain Discovery Environment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,618 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Terrain Discovery Environment API",
+    "version": "2026.04"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Keycloak Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/token/keycloak"
+          },
+          "docs": "Obtain an OAuth access token from Keycloak for authenticating with Terrain."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Filesystem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/directory",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The iRODS path of the directory to list"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of entries to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "sort-col",
+                "value": "",
+                "type": "query",
+                "description": "Column to sort by (name, size, date-created, date-modified)"
+              },
+              {
+                "name": "sort-dir",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Lists the contents of a directory in the iRODS data store."
+        },
+        {
+          "info": {
+            "name": "Create Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/directory/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new directory in the iRODS data store."
+        },
+        {
+          "info": {
+            "name": "Get Root Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/root"
+          },
+          "docs": "Returns the root directory listing for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get File Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/stat",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "iRODS path of the file or directory"
+              }
+            ]
+          },
+          "docs": "Returns metadata and statistics for one or more files or directories."
+        },
+        {
+          "info": {
+            "name": "Check Path Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/exists",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "iRODS path to check"
+              }
+            ]
+          },
+          "docs": "Checks whether one or more paths exist in iRODS."
+        },
+        {
+          "info": {
+            "name": "Move Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves one or more files or directories to a new location in iRODS."
+        },
+        {
+          "info": {
+            "name": "Rename File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/rename",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a file or directory in iRODS."
+        },
+        {
+          "info": {
+            "name": "Delete Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves one or more files or directories to the user's trash."
+        },
+        {
+          "info": {
+            "name": "Empty Trash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/delete-contents"
+          },
+          "docs": "Permanently deletes all items in the user's trash directory."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/search",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by object type"
+              }
+            ]
+          },
+          "docs": "Performs a full-text search across the iRODS data store."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get File Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/metadata",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "iRODS path of the object"
+              }
+            ]
+          },
+          "docs": "Returns metadata AVU (attribute-value-unit) triples for a file or directory."
+        },
+        {
+          "info": {
+            "name": "Set File Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/metadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets metadata AVU triples on a file or directory."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sharing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Share Data with Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/share",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Shares files or directories with specified users."
+        },
+        {
+          "info": {
+            "name": "Unshare Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/unshare",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes sharing permissions for specified users on files or directories."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/apps",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter apps by name or description"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of apps to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "sort-field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "sort-dir",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Lists available applications in the Discovery Environment."
+        },
+        {
+          "info": {
+            "name": "Get App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/apps/:app-id",
+            "params": [
+              {
+                "name": "app-id",
+                "value": "",
+                "type": "path",
+                "description": "The application UUID"
+              },
+              {
+                "name": "system-id",
+                "value": "",
+                "type": "query",
+                "description": "The app system (e.g., de, tapis)"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific application."
+        },
+        {
+          "info": {
+            "name": "List App Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/apps/categories"
+          },
+          "docs": "Returns a list of application categories for browsing."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Analyses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Analyses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/analyses",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of analyses to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "sort-field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "JSON filter expression"
+              }
+            ]
+          },
+          "docs": "Lists job analyses (runs) for the current user."
+        },
+        {
+          "info": {
+            "name": "Submit Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/analyses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new analysis job for execution."
+        },
+        {
+          "info": {
+            "name": "Get Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/analyses/:analysis-id",
+            "params": [
+              {
+                "name": "analysis-id",
+                "value": "",
+                "type": "path",
+                "description": "The analysis UUID"
+              }
+            ]
+          },
+          "docs": "Returns details and status for a specific analysis job."
+        },
+        {
+          "info": {
+            "name": "Delete Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://de.cyverse.org/terrain/secured/analyses/:analysis-id",
+            "params": [
+              {
+                "name": "analysis-id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a completed analysis from the user's history."
+        },
+        {
+          "info": {
+            "name": "Stop Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/analyses/:analysis-id/stop",
+            "params": [
+              {
+                "name": "analysis-id",
+                "value": "",
+                "type": "path",
+                "description": "The analysis UUID"
+              }
+            ]
+          },
+          "docs": "Stops a running analysis job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/notifications",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum notifications to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "seen",
+                "value": "",
+                "type": "query",
+                "description": "Filter by read/unread status"
+              }
+            ]
+          },
+          "docs": "Returns a list of notifications for the current user."
+        },
+        {
+          "info": {
+            "name": "Mark All Notifications Seen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/notifications/mark-all-seen"
+          },
+          "docs": "Marks all notifications as read for the current user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Permanent Id Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/permanent-id-requests"
+          },
+          "docs": "Lists all permanent identifier (DOI) requests for the current user."
+        },
+        {
+          "info": {
+            "name": "Create Permanent Id Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/permanent-id-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a request to assign a DOI or other permanent identifier to a dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
