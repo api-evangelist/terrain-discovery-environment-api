@@ -6,7 +6,7 @@ description: >-
   covering filesystem operations, application management, data analysis, metadata annotation, notifications, and
   persistent identifier management.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Bioinformatics
   - Data Science
