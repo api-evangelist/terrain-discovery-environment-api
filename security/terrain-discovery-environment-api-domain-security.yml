@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: cyverse.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 31 13:06:27 2026 GMT
+  hsts: true
+  hsts_max_age: 300
+- host: de.cyverse.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 20 17:39:48 2026 GMT
+  hsts: null
+domains:
+- domain: cyverse.org
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

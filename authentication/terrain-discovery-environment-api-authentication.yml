@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/terrain-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: KeycloakBearer
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+  sources:
+  - openapi/terrain-openapi.yml
+- name: JwtHeader
+  type: apiKey
+  in: header
+  parameter: X-Iplant-De-Jwt
+  description: Signed JWT token passed in the X-Iplant-De-Jwt header
+  sources:
+  - openapi/terrain-openapi.yml

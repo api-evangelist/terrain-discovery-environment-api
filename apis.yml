@@ -44,6 +44,10 @@ apis:
           https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/openapi/terrain-openapi.yml
         type: OpenAPI
 common:
+  - type: DomainSecurity
+    url: security/terrain-discovery-environment-api-domain-security.yml
+  - type: Authentication
+    url: authentication/terrain-discovery-environment-api-authentication.yml
   - name: CyVerse Developer Portal
     url: https://cyverse.org/Science-APIs
     type: Portal
