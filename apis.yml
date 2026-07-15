@@ -44,6 +44,8 @@ apis:
           https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/openapi/terrain-openapi.yml
         type: OpenAPI
 common:
+  - type: AgenticAccess
+    url: agentic-access/terrain-discovery-environment-api-agentic-access.yml
   - type: DomainSecurity
     url: security/terrain-discovery-environment-api-domain-security.yml
   - type: Authentication
