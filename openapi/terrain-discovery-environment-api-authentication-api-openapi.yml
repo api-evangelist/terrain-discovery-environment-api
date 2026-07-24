@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Authentication API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Authentication
+  description: Token and authentication management
+paths:
+  /token/keycloak:
+    get:
+      operationId: GetKeycloakToken
+      summary: Get Keycloak Token
+      description: Obtain an OAuth access token from Keycloak for authenticating with Terrain.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+        refresh_token:
+          type: string
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

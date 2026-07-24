@@ -1,0 +1,409 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Filesystem API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Filesystem
+  description: iRODS filesystem operations - browse, create, move, delete files and directories
+paths:
+  /secured/filesystem/directory:
+    get:
+      operationId: ListDirectory
+      summary: List Directory
+      description: Lists the contents of a directory in the iRODS data store.
+      tags:
+      - Filesystem
+      parameters:
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The iRODS path of the directory to list
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 100
+        description: Maximum number of entries to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+        description: Pagination offset
+      - name: sort-col
+        in: query
+        schema:
+          type: string
+        description: Column to sort by (name, size, date-created, date-modified)
+      - name: sort-dir
+        in: query
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+        description: Sort direction
+      responses:
+        '200':
+          description: Directory listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryListing'
+  /secured/filesystem/directory/create:
+    post:
+      operationId: CreateDirectory
+      summary: Create Directory
+      description: Creates a new directory in the iRODS data store.
+      tags:
+      - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDirectoryRequest'
+      responses:
+        '200':
+          description: Directory created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemObject'
+  /secured/filesystem/root:
+    get:
+      operationId: GetRootDirectory
+      summary: Get Root Directory
+      description: Returns the root directory listing for the authenticated user.
+      tags:
+      - Filesystem
+      responses:
+        '200':
+          description: Root directory contents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootListing'
+  /secured/filesystem/stat:
+    get:
+      operationId: GetFileStats
+      summary: Get File Stats
+      description: Returns metadata and statistics for one or more files or directories.
+      tags:
+      - Filesystem
+      parameters:
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+        description: iRODS path of the file or directory
+      responses:
+        '200':
+          description: File or directory statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileStats'
+  /secured/filesystem/exists:
+    get:
+      operationId: CheckPathExists
+      summary: Check Path Exists
+      description: Checks whether one or more paths exist in iRODS.
+      tags:
+      - Filesystem
+      parameters:
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+        description: iRODS path to check
+      responses:
+        '200':
+          description: Existence check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathExistence'
+  /secured/filesystem/move:
+    post:
+      operationId: MoveFiles
+      summary: Move Files
+      description: Moves one or more files or directories to a new location in iRODS.
+      tags:
+      - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveRequest'
+      responses:
+        '200':
+          description: Move completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveResponse'
+  /secured/filesystem/rename:
+    post:
+      operationId: RenameFile
+      summary: Rename File
+      description: Renames a file or directory in iRODS.
+      tags:
+      - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenameRequest'
+      responses:
+        '200':
+          description: Rename completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemObject'
+  /secured/filesystem/delete:
+    post:
+      operationId: DeleteFiles
+      summary: Delete Files
+      description: Moves one or more files or directories to the user's trash.
+      tags:
+      - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Files moved to trash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+  /secured/filesystem/delete-contents:
+    post:
+      operationId: EmptyTrash
+      summary: Empty Trash
+      description: Permanently deletes all items in the user's trash directory.
+      tags:
+      - Filesystem
+      responses:
+        '200':
+          description: Trash emptied
+  /secured/filesystem/search:
+    get:
+      operationId: SearchFilesystem
+      summary: Search Filesystem
+      description: Performs a full-text search across the iRODS data store.
+      tags:
+      - Filesystem
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Search query string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum results to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - file
+          - folder
+          - any
+        description: Filter by object type
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+components:
+  schemas:
+    DeleteRequest:
+      type: object
+      required:
+      - paths
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: List of paths to delete
+    MoveResponse:
+      type: object
+      properties:
+        sources:
+          type: array
+          items:
+            type: string
+        dest:
+          type: string
+    CreateDirectoryRequest:
+      type: object
+      required:
+      - path
+      properties:
+        path:
+          type: string
+          description: Full iRODS path for the new directory
+    PathExistence:
+      type: object
+      properties:
+        paths:
+          type: object
+          additionalProperties:
+            type: boolean
+    DirectoryListing:
+      type: object
+      properties:
+        path:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        permission:
+          type: string
+        folders:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        total:
+          type: integer
+    SearchResults:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        total:
+          type: integer
+        offset:
+          type: integer
+    DeleteResponse:
+      type: object
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+    FileSystemObject:
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        label:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        file-size:
+          type: integer
+        permission:
+          type: string
+        file-type:
+          type: string
+    RenameRequest:
+      type: object
+      required:
+      - source
+      - dest
+      properties:
+        source:
+          type: string
+          description: Current path
+        dest:
+          type: string
+          description: New path or name
+    FileStats:
+      type: object
+      properties:
+        path:
+          type: string
+        type:
+          type: string
+          enum:
+          - file
+          - dir
+        permission:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        file-size:
+          type: integer
+    RootListing:
+      type: object
+      properties:
+        roots:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+    MoveRequest:
+      type: object
+      required:
+      - sources
+      - dest
+      properties:
+        sources:
+          type: array
+          items:
+            type: string
+          description: List of source paths to move
+        dest:
+          type: string
+          description: Destination directory path
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

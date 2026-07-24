@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Apps API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Apps
+  description: Application metadata, discovery, and management
+paths:
+  /secured/apps:
+    get:
+      operationId: ListApps
+      summary: List Apps
+      description: Lists available applications in the Discovery Environment.
+      tags:
+      - Apps
+      parameters:
+      - name: search
+        in: query
+        schema:
+          type: string
+        description: Filter apps by name or description
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of apps to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      - name: sort-field
+        in: query
+        schema:
+          type: string
+        description: Field to sort by
+      - name: sort-dir
+        in: query
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+        description: Sort direction
+      responses:
+        '200':
+          description: List of apps
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppList'
+  /secured/apps/{app-id}:
+    get:
+      operationId: GetApp
+      summary: Get App
+      description: Returns details for a specific application.
+      tags:
+      - Apps
+      parameters:
+      - name: app-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The application UUID
+      - name: system-id
+        in: query
+        schema:
+          type: string
+        description: The app system (e.g., de, tapis)
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+  /secured/apps/categories:
+    get:
+      operationId: ListAppCategories
+      summary: List App Categories
+      description: Returns a list of application categories for browsing.
+      tags:
+      - Apps
+      responses:
+        '200':
+          description: App categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppCategoryList'
+components:
+  schemas:
+    App:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        wiki_url:
+          type: string
+        integration_date:
+          type: string
+        edited_date:
+          type: string
+        app_type:
+          type: string
+        system_id:
+          type: string
+        disabled:
+          type: boolean
+        deleted:
+          type: boolean
+        pipeline_eligibility:
+          type: object
+    AppCategoryList:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              app_count:
+                type: integer
+    AppList:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        total:
+          type: integer
+        offset:
+          type: integer
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

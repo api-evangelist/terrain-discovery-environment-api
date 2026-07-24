@@ -1,0 +1,100 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Notifications API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Notifications
+  description: User notification management
+paths:
+  /secured/notifications:
+    get:
+      operationId: ListNotifications
+      summary: List Notifications
+      description: Returns a list of notifications for the current user.
+      tags:
+      - Notifications
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum notifications to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      - name: seen
+        in: query
+        schema:
+          type: boolean
+        description: Filter by read/unread status
+      responses:
+        '200':
+          description: User notifications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationList'
+  /secured/notifications/mark-all-seen:
+    post:
+      operationId: MarkAllNotificationsSeen
+      summary: Mark All Notifications Seen
+      description: Marks all notifications as read for the current user.
+      tags:
+      - Notifications
+      responses:
+        '200':
+          description: Notifications marked as seen
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        subject:
+          type: string
+        seen:
+          type: boolean
+        deleted:
+          type: boolean
+        timestamp:
+          type: string
+        message:
+          type: object
+    NotificationList:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        total:
+          type: integer
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

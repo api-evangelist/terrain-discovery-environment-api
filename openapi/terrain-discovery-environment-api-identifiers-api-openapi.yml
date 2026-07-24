@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Identifiers API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Identifiers
+  description: Permanent identifier (DOI) requests
+paths:
+  /secured/permanent-id-requests:
+    get:
+      operationId: ListPermanentIdRequests
+      summary: List Permanent Id Requests
+      description: Lists all permanent identifier (DOI) requests for the current user.
+      tags:
+      - Identifiers
+      responses:
+        '200':
+          description: List of permanent ID requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermanentIdRequestList'
+    post:
+      operationId: CreatePermanentIdRequest
+      summary: Create Permanent Id Request
+      description: Submits a request to assign a DOI or other permanent identifier to a dataset.
+      tags:
+      - Identifiers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermanentIdRequest'
+      responses:
+        '200':
+          description: Permanent ID request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermanentIdRequestResponse'
+components:
+  schemas:
+    PermanentIdRequestResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+        requested_by:
+          type: string
+        date_submitted:
+          type: string
+        status:
+          type: string
+    PermanentIdRequestList:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermanentIdRequestResponse'
+    PermanentIdRequest:
+      type: object
+      required:
+      - path
+      - type
+      properties:
+        path:
+          type: string
+          description: iRODS path of the dataset to assign an identifier
+        type:
+          type: string
+          enum:
+          - ARK
+          - DOI
+          description: Type of permanent identifier to request
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

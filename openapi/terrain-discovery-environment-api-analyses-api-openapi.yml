@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Analyses
+  description: Job submission, monitoring, and management
+paths:
+  /secured/analyses:
+    get:
+      operationId: ListAnalyses
+      summary: List Analyses
+      description: Lists job analyses (runs) for the current user.
+      tags:
+      - Analyses
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of analyses to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      - name: sort-field
+        in: query
+        schema:
+          type: string
+        description: Field to sort by
+      - name: filter
+        in: query
+        schema:
+          type: string
+        description: JSON filter expression
+      responses:
+        '200':
+          description: List of analyses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisList'
+    post:
+      operationId: SubmitAnalysis
+      summary: Submit Analysis
+      description: Submits a new analysis job for execution.
+      tags:
+      - Analyses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisSubmission'
+      responses:
+        '200':
+          description: Analysis submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+  /secured/analyses/{analysis-id}:
+    get:
+      operationId: GetAnalysis
+      summary: Get Analysis
+      description: Returns details and status for a specific analysis job.
+      tags:
+      - Analyses
+      parameters:
+      - name: analysis-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The analysis UUID
+      responses:
+        '200':
+          description: Analysis details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+    delete:
+      operationId: DeleteAnalysis
+      summary: Delete Analysis
+      description: Deletes a completed analysis from the user's history.
+      tags:
+      - Analyses
+      parameters:
+      - name: analysis-id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Analysis deleted
+  /secured/analyses/{analysis-id}/stop:
+    post:
+      operationId: StopAnalysis
+      summary: Stop Analysis
+      description: Stops a running analysis job.
+      tags:
+      - Analyses
+      parameters:
+      - name: analysis-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The analysis UUID
+      responses:
+        '200':
+          description: Analysis stopped
+components:
+  schemas:
+    AnalysisList:
+      type: object
+      properties:
+        analyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Analysis'
+        total:
+          type: integer
+        offset:
+          type: integer
+    Analysis:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        app_id:
+          type: string
+        app_name:
+          type: string
+        status:
+          type: string
+          enum:
+          - Submitted
+          - Running
+          - Completed
+          - Failed
+          - Canceled
+        start_date:
+          type: string
+        end_date:
+          type: string
+        result_folder_path:
+          type: string
+    AnalysisSubmission:
+      type: object
+      required:
+      - name
+      - app_id
+      - system_id
+      - config
+      properties:
+        name:
+          type: string
+          description: Name for this analysis job
+        app_id:
+          type: string
+          description: UUID of the application to run
+        system_id:
+          type: string
+          description: System to run on (de, tapis)
+        description:
+          type: string
+        config:
+          type: object
+          description: Application-specific parameter configuration
+        output_dir:
+          type: string
+          description: iRODS path for output files
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

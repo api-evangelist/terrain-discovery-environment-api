@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Search API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Search
+  description: Full-text search across data and apps
+paths:
+  /secured/filesystem/search:
+    get:
+      operationId: SearchFilesystem
+      summary: Search Filesystem
+      description: Performs a full-text search across the iRODS data store.
+      tags:
+      - Search
+      parameters:
+      - name: search
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Search query string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Maximum results to return
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Pagination offset
+      - name: type
+        in: query
+        schema:
+          type: string
+          enum:
+          - file
+          - folder
+          - any
+        description: Filter by object type
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+components:
+  schemas:
+    SearchResults:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        total:
+          type: integer
+        offset:
+          type: integer
+    FileSystemObject:
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        label:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        file-size:
+          type: integer
+        permission:
+          type: string
+        file-type:
+          type: string
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header

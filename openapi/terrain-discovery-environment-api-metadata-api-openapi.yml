@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment Analyses Metadata API
+  description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+- url: https://de.cyverse.org/terrain
+  description: CyVerse Discovery Environment Production
+security:
+- KeycloakBearer: []
+- JwtHeader: []
+tags:
+- name: Metadata
+  description: File and data metadata annotation
+paths:
+  /secured/filesystem/metadata:
+    get:
+      operationId: GetFileMetadata
+      summary: Get File Metadata
+      description: Returns metadata AVU (attribute-value-unit) triples for a file or directory.
+      tags:
+      - Metadata
+      parameters:
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+        description: iRODS path of the object
+      responses:
+        '200':
+          description: File metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataResponse'
+    post:
+      operationId: SetFileMetadata
+      summary: Set File Metadata
+      description: Sets metadata AVU triples on a file or directory.
+      tags:
+      - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataSetRequest'
+      responses:
+        '200':
+          description: Metadata set
+components:
+  schemas:
+    MetadataResponse:
+      type: object
+      properties:
+        path:
+          type: string
+        avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+        irods-avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+    AVU:
+      type: object
+      properties:
+        attr:
+          type: string
+          description: Attribute name
+        value:
+          type: string
+          description: Attribute value
+        unit:
+          type: string
+          description: Optional unit
+    MetadataSetRequest:
+      type: object
+      properties:
+        path:
+          type: string
+        avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header
