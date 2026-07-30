@@ -6,7 +6,20 @@ description: >-
   covering filesystem operations, application management, data analysis, metadata annotation, notifications, and
   persistent identifier management.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/terrain-discovery-environment-api.png
 tags:
   - Bioinformatics
   - Data Science
@@ -19,30 +32,150 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: terrain-discovery-environment-api:terrain-api
-    name: Terrain API
-    description: >-
-      The Terrain API is the main entry-point REST service for the CyVerse Discovery Environment. It handles
-      authentication via Keycloak JWT tokens and orchestrates calls to backend services for filesystem management, app
-      execution, data analysis, metadata, notifications, and more.
-    humanURL: https://cyverse.org/Science-APIs
-    baseURL: https://de.cyverse.org/terrain
-    tags:
-      - Bioinformatics
-      - Filesystem
-      - Data Analysis
-      - Applications
-      - Notifications
-    properties:
-      - url: https://docs.cyverse.org/services/api_overview/
-        type: Documentation
-      - url: https://de.cyverse.org/terrain/docs
-        type: SwaggerUI
-      - url: https://github.com/cyverse-de/terrain
-        type: Repository
-      - url: >-
-          https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/openapi/terrain-openapi.yml
-        type: OpenAPI
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-analyses-api
+  name: Terrain Discovery Environment API Analyses API
+  description: Job submission, monitoring, and management
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Analyses
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-analyses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-apps-api
+  name: Terrain Discovery Environment API Apps API
+  description: Application metadata, discovery, and management
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-apps-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-authentication-api
+  name: Terrain Discovery Environment API Authentication API
+  description: Token and authentication management
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-filesystem-api
+  name: Terrain Discovery Environment API Filesystem API
+  description: iRODS filesystem operations - browse, create, move, delete files and directories
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Filesystem
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-filesystem-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-identifiers-api
+  name: Terrain Discovery Environment API Identifiers API
+  description: Permanent identifier (DOI) requests
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Identifiers
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-identifiers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-metadata-api
+  name: Terrain Discovery Environment API Metadata API
+  description: File and data metadata annotation
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-notifications-api
+  name: Terrain Discovery Environment API Notifications API
+  description: User notification management
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-search-api
+  name: Terrain Discovery Environment API Search API
+  description: Full-text search across data and apps
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
+- aid: terrain-discovery-environment-api:terrain-discovery-environment-api-sharing-api
+  name: Terrain Discovery Environment API Sharing API
+  description: Data sharing and permissions
+  humanURL: https://cyverse.org/Science-APIs
+  baseURL: https://de.cyverse.org/terrain
+  tags:
+  - Sharing
+  properties:
+  - type: OpenAPI
+    url: openapi/terrain-discovery-environment-api-sharing-api-openapi.yml
+  - type: Documentation
+    url: https://docs.cyverse.org/services/api_overview/
+  - type: SwaggerUI
+    url: https://de.cyverse.org/terrain/docs
+  - type: Repository
+    url: https://github.com/cyverse-de/terrain
 common:
   - type: AgenticAccess
     url: agentic-access/terrain-discovery-environment-api-agentic-access.yml
