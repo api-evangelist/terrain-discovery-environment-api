@@ -1,0 +1,1014 @@
+openapi: 3.1.0
+info:
+  title: Terrain Discovery Environment API
+  description: >-
+    Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE),
+    an open-source data science workbench for life sciences. Terrain validates user
+    authentication via Keycloak JWT tokens and orchestrates calls to backend
+    microservices covering filesystem operations, application management, data
+    analysis, metadata annotation, notifications, and persistent identifier management.
+  version: '2026.04'
+  contact:
+    name: CyVerse Support
+    url: https://cyverse.org/contact
+  license:
+    name: BSD 3-Clause
+    url: https://github.com/cyverse-de/terrain/blob/main/LICENSE
+servers:
+  - url: https://de.cyverse.org/terrain
+    description: CyVerse Discovery Environment Production
+security:
+  - KeycloakBearer: []
+  - JwtHeader: []
+tags:
+  - name: Authentication
+    description: Token and authentication management
+  - name: Filesystem
+    description: iRODS filesystem operations - browse, create, move, delete files and directories
+  - name: Apps
+    description: Application metadata, discovery, and management
+  - name: Analyses
+    description: Job submission, monitoring, and management
+  - name: Metadata
+    description: File and data metadata annotation
+  - name: Notifications
+    description: User notification management
+  - name: Sharing
+    description: Data sharing and permissions
+  - name: Search
+    description: Full-text search across data and apps
+  - name: Identifiers
+    description: Permanent identifier (DOI) requests
+paths:
+  /token/keycloak:
+    get:
+      operationId: GetKeycloakToken
+      summary: Get Keycloak Token
+      description: Obtain an OAuth access token from Keycloak for authenticating with Terrain.
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Authentication token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+  /secured/filesystem/directory:
+    get:
+      operationId: ListDirectory
+      summary: List Directory
+      description: Lists the contents of a directory in the iRODS data store.
+      tags:
+        - Filesystem
+      parameters:
+        - name: path
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The iRODS path of the directory to list
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+          description: Maximum number of entries to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: Pagination offset
+        - name: sort-col
+          in: query
+          schema:
+            type: string
+          description: Column to sort by (name, size, date-created, date-modified)
+        - name: sort-dir
+          in: query
+          schema:
+            type: string
+            enum: [ASC, DESC]
+          description: Sort direction
+      responses:
+        '200':
+          description: Directory listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryListing'
+  /secured/filesystem/directory/create:
+    post:
+      operationId: CreateDirectory
+      summary: Create Directory
+      description: Creates a new directory in the iRODS data store.
+      tags:
+        - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDirectoryRequest'
+      responses:
+        '200':
+          description: Directory created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemObject'
+  /secured/filesystem/root:
+    get:
+      operationId: GetRootDirectory
+      summary: Get Root Directory
+      description: Returns the root directory listing for the authenticated user.
+      tags:
+        - Filesystem
+      responses:
+        '200':
+          description: Root directory contents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RootListing'
+  /secured/filesystem/stat:
+    get:
+      operationId: GetFileStats
+      summary: Get File Stats
+      description: Returns metadata and statistics for one or more files or directories.
+      tags:
+        - Filesystem
+      parameters:
+        - name: path
+          in: query
+          required: true
+          schema:
+            type: string
+          description: iRODS path of the file or directory
+      responses:
+        '200':
+          description: File or directory statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileStats'
+  /secured/filesystem/exists:
+    get:
+      operationId: CheckPathExists
+      summary: Check Path Exists
+      description: Checks whether one or more paths exist in iRODS.
+      tags:
+        - Filesystem
+      parameters:
+        - name: path
+          in: query
+          required: true
+          schema:
+            type: string
+          description: iRODS path to check
+      responses:
+        '200':
+          description: Existence check result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathExistence'
+  /secured/filesystem/move:
+    post:
+      operationId: MoveFiles
+      summary: Move Files
+      description: Moves one or more files or directories to a new location in iRODS.
+      tags:
+        - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveRequest'
+      responses:
+        '200':
+          description: Move completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveResponse'
+  /secured/filesystem/rename:
+    post:
+      operationId: RenameFile
+      summary: Rename File
+      description: Renames a file or directory in iRODS.
+      tags:
+        - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenameRequest'
+      responses:
+        '200':
+          description: Rename completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemObject'
+  /secured/filesystem/delete:
+    post:
+      operationId: DeleteFiles
+      summary: Delete Files
+      description: Moves one or more files or directories to the user's trash.
+      tags:
+        - Filesystem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Files moved to trash
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+  /secured/filesystem/delete-contents:
+    post:
+      operationId: EmptyTrash
+      summary: Empty Trash
+      description: Permanently deletes all items in the user's trash directory.
+      tags:
+        - Filesystem
+      responses:
+        '200':
+          description: Trash emptied
+  /secured/filesystem/search:
+    get:
+      operationId: SearchFilesystem
+      summary: Search Filesystem
+      description: Performs a full-text search across the iRODS data store.
+      tags:
+        - Search
+        - Filesystem
+      parameters:
+        - name: search
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Maximum results to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+          description: Pagination offset
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [file, folder, any]
+          description: Filter by object type
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+  /secured/filesystem/metadata:
+    get:
+      operationId: GetFileMetadata
+      summary: Get File Metadata
+      description: Returns metadata AVU (attribute-value-unit) triples for a file or directory.
+      tags:
+        - Metadata
+      parameters:
+        - name: path
+          in: query
+          required: true
+          schema:
+            type: string
+          description: iRODS path of the object
+      responses:
+        '200':
+          description: File metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataResponse'
+    post:
+      operationId: SetFileMetadata
+      summary: Set File Metadata
+      description: Sets metadata AVU triples on a file or directory.
+      tags:
+        - Metadata
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataSetRequest'
+      responses:
+        '200':
+          description: Metadata set
+  /secured/filesystem/share:
+    post:
+      operationId: ShareDataWithUsers
+      summary: Share Data with Users
+      description: Shares files or directories with specified users.
+      tags:
+        - Sharing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareRequest'
+      responses:
+        '200':
+          description: Sharing completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareResponse'
+  /secured/filesystem/unshare:
+    post:
+      operationId: UnshareData
+      summary: Unshare Data
+      description: Removes sharing permissions for specified users on files or directories.
+      tags:
+        - Sharing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnshareRequest'
+      responses:
+        '200':
+          description: Unsharing completed
+  /secured/apps:
+    get:
+      operationId: ListApps
+      summary: List Apps
+      description: Lists available applications in the Discovery Environment.
+      tags:
+        - Apps
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Filter apps by name or description
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of apps to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+          description: Pagination offset
+        - name: sort-field
+          in: query
+          schema:
+            type: string
+          description: Field to sort by
+        - name: sort-dir
+          in: query
+          schema:
+            type: string
+            enum: [ASC, DESC]
+          description: Sort direction
+      responses:
+        '200':
+          description: List of apps
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppList'
+  /secured/apps/{app-id}:
+    get:
+      operationId: GetApp
+      summary: Get App
+      description: Returns details for a specific application.
+      tags:
+        - Apps
+      parameters:
+        - name: app-id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The application UUID
+        - name: system-id
+          in: query
+          schema:
+            type: string
+          description: The app system (e.g., de, tapis)
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/App'
+  /secured/apps/categories:
+    get:
+      operationId: ListAppCategories
+      summary: List App Categories
+      description: Returns a list of application categories for browsing.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: App categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppCategoryList'
+  /secured/analyses:
+    get:
+      operationId: ListAnalyses
+      summary: List Analyses
+      description: Lists job analyses (runs) for the current user.
+      tags:
+        - Analyses
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of analyses to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+          description: Pagination offset
+        - name: sort-field
+          in: query
+          schema:
+            type: string
+          description: Field to sort by
+        - name: filter
+          in: query
+          schema:
+            type: string
+          description: JSON filter expression
+      responses:
+        '200':
+          description: List of analyses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisList'
+    post:
+      operationId: SubmitAnalysis
+      summary: Submit Analysis
+      description: Submits a new analysis job for execution.
+      tags:
+        - Analyses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisSubmission'
+      responses:
+        '200':
+          description: Analysis submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+  /secured/analyses/{analysis-id}:
+    get:
+      operationId: GetAnalysis
+      summary: Get Analysis
+      description: Returns details and status for a specific analysis job.
+      tags:
+        - Analyses
+      parameters:
+        - name: analysis-id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The analysis UUID
+      responses:
+        '200':
+          description: Analysis details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+    delete:
+      operationId: DeleteAnalysis
+      summary: Delete Analysis
+      description: Deletes a completed analysis from the user's history.
+      tags:
+        - Analyses
+      parameters:
+        - name: analysis-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Analysis deleted
+  /secured/analyses/{analysis-id}/stop:
+    post:
+      operationId: StopAnalysis
+      summary: Stop Analysis
+      description: Stops a running analysis job.
+      tags:
+        - Analyses
+      parameters:
+        - name: analysis-id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The analysis UUID
+      responses:
+        '200':
+          description: Analysis stopped
+  /secured/notifications:
+    get:
+      operationId: ListNotifications
+      summary: List Notifications
+      description: Returns a list of notifications for the current user.
+      tags:
+        - Notifications
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Maximum notifications to return
+        - name: offset
+          in: query
+          schema:
+            type: integer
+          description: Pagination offset
+        - name: seen
+          in: query
+          schema:
+            type: boolean
+          description: Filter by read/unread status
+      responses:
+        '200':
+          description: User notifications
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationList'
+  /secured/notifications/mark-all-seen:
+    post:
+      operationId: MarkAllNotificationsSeen
+      summary: Mark All Notifications Seen
+      description: Marks all notifications as read for the current user.
+      tags:
+        - Notifications
+      responses:
+        '200':
+          description: Notifications marked as seen
+  /secured/permanent-id-requests:
+    get:
+      operationId: ListPermanentIdRequests
+      summary: List Permanent Id Requests
+      description: Lists all permanent identifier (DOI) requests for the current user.
+      tags:
+        - Identifiers
+      responses:
+        '200':
+          description: List of permanent ID requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermanentIdRequestList'
+    post:
+      operationId: CreatePermanentIdRequest
+      summary: Create Permanent Id Request
+      description: Submits a request to assign a DOI or other permanent identifier to a dataset.
+      tags:
+        - Identifiers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PermanentIdRequest'
+      responses:
+        '200':
+          description: Permanent ID request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermanentIdRequestResponse'
+components:
+  securitySchemes:
+    KeycloakBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer JWT token obtained from Keycloak via /terrain/token/keycloak
+    JwtHeader:
+      type: apiKey
+      in: header
+      name: X-Iplant-De-Jwt
+      description: Signed JWT token passed in the X-Iplant-De-Jwt header
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+        refresh_token:
+          type: string
+    DirectoryListing:
+      type: object
+      properties:
+        path:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        permission:
+          type: string
+        folders:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        total:
+          type: integer
+    FileSystemObject:
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        label:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        file-size:
+          type: integer
+        permission:
+          type: string
+        file-type:
+          type: string
+    RootListing:
+      type: object
+      properties:
+        roots:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+    FileStats:
+      type: object
+      properties:
+        path:
+          type: string
+        type:
+          type: string
+          enum: [file, dir]
+        permission:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        file-size:
+          type: integer
+    PathExistence:
+      type: object
+      properties:
+        paths:
+          type: object
+          additionalProperties:
+            type: boolean
+    CreateDirectoryRequest:
+      type: object
+      required: [path]
+      properties:
+        path:
+          type: string
+          description: Full iRODS path for the new directory
+    MoveRequest:
+      type: object
+      required: [sources, dest]
+      properties:
+        sources:
+          type: array
+          items:
+            type: string
+          description: List of source paths to move
+        dest:
+          type: string
+          description: Destination directory path
+    MoveResponse:
+      type: object
+      properties:
+        sources:
+          type: array
+          items:
+            type: string
+        dest:
+          type: string
+    RenameRequest:
+      type: object
+      required: [source, dest]
+      properties:
+        source:
+          type: string
+          description: Current path
+        dest:
+          type: string
+          description: New path or name
+    DeleteRequest:
+      type: object
+      required: [paths]
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+          description: List of paths to delete
+    DeleteResponse:
+      type: object
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+    SearchResults:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        total:
+          type: integer
+        offset:
+          type: integer
+    MetadataResponse:
+      type: object
+      properties:
+        path:
+          type: string
+        avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+        irods-avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+    AVU:
+      type: object
+      properties:
+        attr:
+          type: string
+          description: Attribute name
+        value:
+          type: string
+          description: Attribute value
+        unit:
+          type: string
+          description: Optional unit
+    MetadataSetRequest:
+      type: object
+      properties:
+        path:
+          type: string
+        avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+    ShareRequest:
+      type: object
+      properties:
+        sharing:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+              paths:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                    permission:
+                      type: string
+                      enum: [read, write, own]
+    ShareResponse:
+      type: object
+      properties:
+        sharing:
+          type: array
+          items:
+            type: object
+    UnshareRequest:
+      type: object
+      properties:
+        unsharing:
+          type: array
+          items:
+            type: object
+            properties:
+              user:
+                type: string
+              paths:
+                type: array
+                items:
+                  type: string
+    AppList:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        total:
+          type: integer
+        offset:
+          type: integer
+    App:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        wiki_url:
+          type: string
+        integration_date:
+          type: string
+        edited_date:
+          type: string
+        app_type:
+          type: string
+        system_id:
+          type: string
+        disabled:
+          type: boolean
+        deleted:
+          type: boolean
+        pipeline_eligibility:
+          type: object
+    AppCategoryList:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              app_count:
+                type: integer
+    AnalysisList:
+      type: object
+      properties:
+        analyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Analysis'
+        total:
+          type: integer
+        offset:
+          type: integer
+    Analysis:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        app_id:
+          type: string
+        app_name:
+          type: string
+        status:
+          type: string
+          enum: [Submitted, Running, Completed, Failed, Canceled]
+        start_date:
+          type: string
+        end_date:
+          type: string
+        result_folder_path:
+          type: string
+    AnalysisSubmission:
+      type: object
+      required: [name, app_id, system_id, config]
+      properties:
+        name:
+          type: string
+          description: Name for this analysis job
+        app_id:
+          type: string
+          description: UUID of the application to run
+        system_id:
+          type: string
+          description: System to run on (de, tapis)
+        description:
+          type: string
+        config:
+          type: object
+          description: Application-specific parameter configuration
+        output_dir:
+          type: string
+          description: iRODS path for output files
+    NotificationList:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        total:
+          type: integer
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        subject:
+          type: string
+        seen:
+          type: boolean
+        deleted:
+          type: boolean
+        timestamp:
+          type: string
+        message:
+          type: object
+    PermanentIdRequestList:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermanentIdRequestResponse'
+    PermanentIdRequest:
+      type: object
+      required: [path, type]
+      properties:
+        path:
+          type: string
+          description: iRODS path of the dataset to assign an identifier
+        type:
+          type: string
+          enum: [ARK, DOI]
+          description: Type of permanent identifier to request
+    PermanentIdRequestResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+        requested_by:
+          type: string
+        date_submitted:
+          type: string
+        status:
+          type: string

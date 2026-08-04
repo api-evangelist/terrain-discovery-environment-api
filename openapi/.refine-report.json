@@ -1,0 +1,30 @@
+{
+  "provider": "terrain-discovery-environment-api",
+  "sources": [
+    "terrain-discovery-environment-api-analyses-api-openapi.yml",
+    "terrain-discovery-environment-api-apps-api-openapi.yml",
+    "terrain-discovery-environment-api-authentication-api-openapi.yml",
+    "terrain-discovery-environment-api-filesystem-api-openapi.yml",
+    "terrain-discovery-environment-api-identifiers-api-openapi.yml",
+    "terrain-discovery-environment-api-metadata-api-openapi.yml",
+    "terrain-discovery-environment-api-notifications-api-openapi.yml",
+    "terrain-discovery-environment-api-search-api-openapi.yml",
+    "terrain-discovery-environment-api-sharing-api-openapi.yml"
+  ],
+  "outputs": [
+    "terrain-discovery-environment-api-analyses-api-openapi.yml",
+    "terrain-discovery-environment-api-apps-api-openapi.yml",
+    "terrain-discovery-environment-api-authentication-api-openapi.yml",
+    "terrain-discovery-environment-api-filesystem-api-openapi.yml",
+    "terrain-discovery-environment-api-identifiers-api-openapi.yml",
+    "terrain-discovery-environment-api-metadata-api-openapi.yml",
+    "terrain-discovery-environment-api-notifications-api-openapi.yml",
+    "terrain-discovery-environment-api-search-api-openapi.yml",
+    "terrain-discovery-environment-api-sharing-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
