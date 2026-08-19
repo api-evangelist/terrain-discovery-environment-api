@@ -1,0 +1,365 @@
+{
+  "item": [
+    {
+      "id": "6ba3c40f-4fd9-4dbc-800e-cc831e7dcfca",
+      "name": "Apps",
+      "description": {
+        "content": "Application metadata, discovery, and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9270e58e-1df3-46ad-98c7-abb59ed6031e",
+          "name": "List Apps",
+          "request": {
+            "name": "List Apps",
+            "description": {
+              "content": "Lists available applications in the Discovery Environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter apps by name or description"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of apps to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-field",
+                  "value": "<string>",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-dir",
+                  "value": "<string>",
+                  "description": "Sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "beff4f5c-46f7-4a5b-93a0-89c3ef75c3ff",
+              "name": "List of apps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort-field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apps\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"wiki_url\": \"string\",\n      \"integration_date\": \"string\",\n      \"edited_date\": \"string\",\n      \"app_type\": \"string\",\n      \"system_id\": \"string\",\n      \"disabled\": true,\n      \"deleted\": true,\n      \"pipeline_eligibility\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"wiki_url\": \"string\",\n      \"integration_date\": \"string\",\n      \"edited_date\": \"string\",\n      \"app_type\": \"string\",\n      \"system_id\": \"string\",\n      \"disabled\": false,\n      \"deleted\": true,\n      \"pipeline_eligibility\": {}\n    }\n  ],\n  \"total\": 7453,\n  \"offset\": 6294\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2a8b651-697e-4454-88d3-6460b8f36478",
+          "name": "Get App",
+          "request": {
+            "name": "Get App",
+            "description": {
+              "content": "Returns details for a specific application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "apps",
+                ":app-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "system-id",
+                  "value": "<string>",
+                  "description": "The app system (e.g., de, tapis)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app-id",
+                  "description": "(Required) The application UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60fe98b8-8552-4311-bd3b-b3e757730e66",
+              "name": "Application details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "apps",
+                    ":app-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "system-id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app-id",
+                      "description": "(Required) The application UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"wiki_url\": \"string\",\n  \"integration_date\": \"string\",\n  \"edited_date\": \"string\",\n  \"app_type\": \"string\",\n  \"system_id\": \"string\",\n  \"disabled\": false,\n  \"deleted\": true,\n  \"pipeline_eligibility\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2f94578-5761-4e27-b0b7-14212a18b1b0",
+          "name": "List App Categories",
+          "request": {
+            "name": "List App Categories",
+            "description": {
+              "content": "Returns a list of application categories for browsing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "apps",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84c2b9ef-a85f-46a1-9cbc-ab3055a7c6e2",
+              "name": "App categories",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "apps",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"categories\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"app_count\": 3976\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"app_count\": 2177\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b828fb29-2fa4-4046-bc33-8637a26994e9",
+    "name": "Terrain Discovery Environment Analyses Apps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

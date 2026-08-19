@@ -1,0 +1,225 @@
+{
+  "item": [
+    {
+      "id": "e1702c87-58d6-4859-ba56-48026cd78f77",
+      "name": "Notifications",
+      "description": {
+        "content": "User notification management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eaa43972-a466-484c-b3d3-0f70d115ddb1",
+          "name": "List Notifications",
+          "request": {
+            "name": "List Notifications",
+            "description": {
+              "content": "Returns a list of notifications for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum notifications to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "seen",
+                  "value": "<boolean>",
+                  "description": "Filter by read/unread status"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8f7b58f-ce20-4918-924a-d79a40400354",
+              "name": "User notifications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "seen",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"subject\": \"string\",\n      \"seen\": true,\n      \"deleted\": false,\n      \"timestamp\": \"string\",\n      \"message\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"subject\": \"string\",\n      \"seen\": true,\n      \"deleted\": false,\n      \"timestamp\": \"string\",\n      \"message\": {}\n    }\n  ],\n  \"total\": 4234\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3da03ab-feb9-481b-b283-e3aa19d11e80",
+          "name": "Mark All Notifications Seen",
+          "request": {
+            "name": "Mark All Notifications Seen",
+            "description": {
+              "content": "Marks all notifications as read for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "notifications",
+                "mark-all-seen"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e44d62c0-fe2a-41b4-9b4c-caa6ca21b418",
+              "name": "Notifications marked as seen",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "notifications",
+                    "mark-all-seen"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6c0a94dd-264e-48bf-9b60-4f9203e8451b",
+    "name": "Terrain Discovery Environment Analyses Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1055 @@
+{
+  "item": [
+    {
+      "id": "092f9d41-1c2d-4e96-bfc3-36c26edbac16",
+      "name": "Filesystem",
+      "description": {
+        "content": "iRODS filesystem operations - browse, create, move, delete files and directories",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "351dcf2d-7a93-41a7-afe7-927f5d0119c0",
+          "name": "List Directory",
+          "request": {
+            "name": "List Directory",
+            "description": {
+              "content": "Lists the contents of a directory in the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "directory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) The iRODS path of the directory to list"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of entries to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-col",
+                  "value": "<string>",
+                  "description": "Column to sort by (name, size, date-created, date-modified)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-dir",
+                  "value": "<string>",
+                  "description": "Sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8967f8eb-a074-4bb8-948f-dc63d80acdf0",
+              "name": "Directory listing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "directory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "sort-col",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort-dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"permission\": \"string\",\n  \"folders\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 4076,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 4225,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"files\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 8114,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 187,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"total\": 1824\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2c036a7-c2f9-4269-981a-31bcba4949a5",
+          "name": "Create Directory",
+          "request": {
+            "name": "Create Directory",
+            "description": {
+              "content": "Creates a new directory in the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "directory",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2be325d2-6dd8-4d75-b064-19247b648cf8",
+              "name": "Directory created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "directory",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"path\": \"string\",\n  \"label\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"file-size\": 3650,\n  \"permission\": \"string\",\n  \"file-type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f5fb92b-d67d-45d3-9a45-dba28663cf5d",
+          "name": "Get Root Directory",
+          "request": {
+            "name": "Get Root Directory",
+            "description": {
+              "content": "Returns the root directory listing for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "root"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ea70452-52d6-4a52-84ff-c30008ba2a27",
+              "name": "Root directory contents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "root"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"roots\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 800,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 6595,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c123a5f-e736-4a3b-b122-d5f4a4cb6f8e",
+          "name": "Get File Stats",
+          "request": {
+            "name": "Get File Stats",
+            "description": {
+              "content": "Returns metadata and statistics for one or more files or directories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "stat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) iRODS path of the file or directory"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "557d64bc-b6df-468f-b69d-a99bb03b1ab2",
+              "name": "File or directory statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "stat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"type\": \"dir\",\n  \"permission\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"file-size\": 971\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a53ae93b-7329-4b2c-9d5e-fc83eb0d71cb",
+          "name": "Check Path Exists",
+          "request": {
+            "name": "Check Path Exists",
+            "description": {
+              "content": "Checks whether one or more paths exist in iRODS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "exists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) iRODS path to check"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7f6e556-e6a3-44c6-9afe-f455ca72ac04",
+              "name": "Existence check result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "exists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paths\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9135e5b-101e-46ae-a863-8d46d093aafd",
+          "name": "Move Files",
+          "request": {
+            "name": "Move Files",
+            "description": {
+              "content": "Moves one or more files or directories to a new location in iRODS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "move"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dest\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "031cd750-6af0-4a50-a504-b6fcfe4beafb",
+              "name": "Move completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dest\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sources\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dest\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "552fe293-dd34-46a9-8523-0e2d49c52898",
+          "name": "Rename File",
+          "request": {
+            "name": "Rename File",
+            "description": {
+              "content": "Renames a file or directory in iRODS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "rename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"dest\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5304dfc4-b85f-40c2-885f-beb2c097a769",
+              "name": "Rename completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "rename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"dest\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"path\": \"string\",\n  \"label\": \"string\",\n  \"date-created\": \"string\",\n  \"date-modified\": \"string\",\n  \"file-size\": 3650,\n  \"permission\": \"string\",\n  \"file-type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "549e75bb-a9db-4cf4-ba10-a40de6b34c49",
+          "name": "Delete Files",
+          "request": {
+            "name": "Delete Files",
+            "description": {
+              "content": "Moves one or more files or directories to the user's trash.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d868592f-a356-4343-9d08-a1bfa12bf67a",
+              "name": "Files moved to trash",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paths\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec8cf1c0-6446-49e2-aefa-29927c5e18a8",
+          "name": "Empty Trash",
+          "request": {
+            "name": "Empty Trash",
+            "description": {
+              "content": "Permanently deletes all items in the user's trash directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "delete-contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9542620-95ba-4288-829b-a9c3cd97f26a",
+              "name": "Trash emptied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "delete-contents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1121232-90be-4b33-95b1-e870f7270b09",
+          "name": "Search Filesystem",
+          "request": {
+            "name": "Search Filesystem",
+            "description": {
+              "content": "Performs a full-text search across the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by object type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc0bc178-127b-46e6-b4a6-2a133c279385",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"matches\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 9128,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 8600,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"total\": 8641,\n  \"offset\": 6495\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54747b6e-3935-4d59-97dc-69a74bb218d5",
+    "name": "Terrain Discovery Environment Analyses Filesystem API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

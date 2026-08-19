@@ -1,0 +1,540 @@
+{
+  "item": [
+    {
+      "id": "ea4e6299-5dc3-4861-a82c-52f7e117c715",
+      "name": "Analyses",
+      "description": {
+        "content": "Job submission, monitoring, and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3ae4dc4-9591-4d4a-8b6f-4750751f8f12",
+          "name": "List Analyses",
+          "request": {
+            "name": "List Analyses",
+            "description": {
+              "content": "Lists job analyses (runs) for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of analyses to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort-field",
+                  "value": "<string>",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "JSON filter expression"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "637c5015-2b18-4f8a-a6e8-e2d4272602d1",
+              "name": "List of analyses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort-field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"analyses\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"app_id\": \"string\",\n      \"app_name\": \"string\",\n      \"status\": \"Submitted\",\n      \"start_date\": \"string\",\n      \"end_date\": \"string\",\n      \"result_folder_path\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"app_id\": \"string\",\n      \"app_name\": \"string\",\n      \"status\": \"Running\",\n      \"start_date\": \"string\",\n      \"end_date\": \"string\",\n      \"result_folder_path\": \"string\"\n    }\n  ],\n  \"total\": 1194,\n  \"offset\": 8174\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cee0f308-c5ee-4d4b-a133-605c82478059",
+          "name": "Submit Analysis",
+          "request": {
+            "name": "Submit Analysis",
+            "description": {
+              "content": "Submits a new analysis job for execution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"system_id\": \"<string>\",\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"output_dir\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "483dc2bd-55c1-4f6f-9800-3b5cf87b3902",
+              "name": "Analysis submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"app_id\": \"<string>\",\n  \"system_id\": \"<string>\",\n  \"config\": \"<object>\",\n  \"description\": \"<string>\",\n  \"output_dir\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"app_id\": \"string\",\n  \"app_name\": \"string\",\n  \"status\": \"Running\",\n  \"start_date\": \"string\",\n  \"end_date\": \"string\",\n  \"result_folder_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42900ab2-4882-4f14-aba5-56ff236c3fee",
+          "name": "Get Analysis",
+          "request": {
+            "name": "Get Analysis",
+            "description": {
+              "content": "Returns details and status for a specific analysis job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses",
+                ":analysis-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analysis-id",
+                  "description": "(Required) The analysis UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee78a0d5-5c23-4ad3-ace1-e1f5acc2154f",
+              "name": "Analysis details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses",
+                    ":analysis-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analysis-id",
+                      "description": "(Required) The analysis UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"app_id\": \"string\",\n  \"app_name\": \"string\",\n  \"status\": \"Running\",\n  \"start_date\": \"string\",\n  \"end_date\": \"string\",\n  \"result_folder_path\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb9a7350-549d-4775-a298-7d8b48c4b52d",
+          "name": "Delete Analysis",
+          "request": {
+            "name": "Delete Analysis",
+            "description": {
+              "content": "Deletes a completed analysis from the user's history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses",
+                ":analysis-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analysis-id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ac80288-8389-460d-836e-4805ed8f709e",
+              "name": "Analysis deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses",
+                    ":analysis-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analysis-id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "527f8ad3-114d-49e0-93af-19efe7858fa1",
+          "name": "Stop Analysis",
+          "request": {
+            "name": "Stop Analysis",
+            "description": {
+              "content": "Stops a running analysis job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "analyses",
+                ":analysis-id",
+                "stop"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "analysis-id",
+                  "description": "(Required) The analysis UUID"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebba53d6-ee13-4b4d-adbc-1dd6f0eefc01",
+              "name": "Analysis stopped",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "analyses",
+                    ":analysis-id",
+                    "stop"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "analysis-id",
+                      "description": "(Required) The analysis UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "86c9863e-7892-47d5-b97c-e2a883a8a9ad",
+    "name": "Terrain Discovery Environment Analyses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

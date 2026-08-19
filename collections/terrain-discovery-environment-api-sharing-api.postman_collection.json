@@ -1,0 +1,239 @@
+{
+  "item": [
+    {
+      "id": "c1a7dfb4-0526-489b-98d7-a1e07ac6d869",
+      "name": "Sharing",
+      "description": {
+        "content": "Data sharing and permissions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60472e96-45fa-40a4-b28a-5e3d954caba5",
+          "name": "Share Data with Users",
+          "request": {
+            "name": "Share Data with Users",
+            "description": {
+              "content": "Shares files or directories with specified users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "share"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "139dc020-cec6-4895-916a-80bd6aa704d6",
+              "name": "Sharing completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "share"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        },\n        {\n          \"path\": \"<string>\",\n          \"permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21b65197-0a60-4862-b4c7-6c31cbfa2543",
+          "name": "Unshare Data",
+          "request": {
+            "name": "Unshare Data",
+            "description": {
+              "content": "Removes sharing permissions for specified users on files or directories.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "unshare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unsharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "271cfad2-9cdf-4a9d-8c47-70c9d8a24a76",
+              "name": "Unsharing completed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "unshare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unsharing\": [\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "859851fd-d9eb-4515-ad7a-80da5ae3f4fe",
+    "name": "Terrain Discovery Environment Analyses Sharing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

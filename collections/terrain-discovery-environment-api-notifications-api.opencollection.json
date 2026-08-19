@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Terrain Discovery Environment Analyses Notifications API",
+    "version": "2026.04"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/notifications",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum notifications to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "seen",
+                "value": "",
+                "type": "query",
+                "description": "Filter by read/unread status"
+              }
+            ]
+          },
+          "docs": "Returns a list of notifications for the current user."
+        },
+        {
+          "info": {
+            "name": "Mark All Notifications Seen",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/notifications/mark-all-seen"
+          },
+          "docs": "Marks all notifications as read for the current user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

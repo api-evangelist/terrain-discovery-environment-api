@@ -1,0 +1,230 @@
+{
+  "item": [
+    {
+      "id": "f3d0e1ad-33ae-4452-a29d-c8da2a8fc1a0",
+      "name": "Metadata",
+      "description": {
+        "content": "File and data metadata annotation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54569882-aa28-4a81-8c08-8ff2533dea3c",
+          "name": "Get File Metadata",
+          "request": {
+            "name": "Get File Metadata",
+            "description": {
+              "content": "Returns metadata AVU (attribute-value-unit) triples for a file or directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) iRODS path of the object"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1caa69b7-a685-4799-bb10-1f98dc570cca",
+              "name": "File metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"avus\": [\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    },\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    }\n  ],\n  \"irods-avus\": [\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    },\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e2b65d1-a1e1-4bf6-9ca1-694f8495e6e7",
+          "name": "Set File Metadata",
+          "request": {
+            "name": "Set File Metadata",
+            "description": {
+              "content": "Sets metadata AVU triples on a file or directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"avus\": [\n    {\n      \"attr\": \"<string>\",\n      \"value\": \"<string>\",\n      \"unit\": \"<string>\"\n    },\n    {\n      \"attr\": \"<string>\",\n      \"value\": \"<string>\",\n      \"unit\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8df6a8ab-a883-4772-ac99-f54e246a384c",
+              "name": "Metadata set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"avus\": [\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    },\n    {\n      \"attr\": \"string\",\n      \"value\": \"string\",\n      \"unit\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47eba180-386e-46dc-9553-8b671237a075",
+    "name": "Terrain Discovery Environment Analyses Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}

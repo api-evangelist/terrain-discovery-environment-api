@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Terrain Discovery Environment Analyses Authentication API",
+    "version": "2026.04"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Keycloak Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/token/keycloak"
+          },
+          "docs": "Obtain an OAuth access token from Keycloak for authenticating with Terrain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

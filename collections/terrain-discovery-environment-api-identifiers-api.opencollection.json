@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Terrain Discovery Environment Analyses Identifiers API",
+    "version": "2026.04"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Permanent Id Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/permanent-id-requests"
+          },
+          "docs": "Lists all permanent identifier (DOI) requests for the current user."
+        },
+        {
+          "info": {
+            "name": "Create Permanent Id Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/permanent-id-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a request to assign a DOI or other permanent identifier to a dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

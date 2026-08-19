@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Terrain Discovery Environment Analyses Filesystem API",
+    "version": "2026.04"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filesystem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/directory",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The iRODS path of the directory to list"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of entries to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "sort-col",
+                "value": "",
+                "type": "query",
+                "description": "Column to sort by (name, size, date-created, date-modified)"
+              },
+              {
+                "name": "sort-dir",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Lists the contents of a directory in the iRODS data store."
+        },
+        {
+          "info": {
+            "name": "Create Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/directory/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new directory in the iRODS data store."
+        },
+        {
+          "info": {
+            "name": "Get Root Directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/root"
+          },
+          "docs": "Returns the root directory listing for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get File Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/stat",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "iRODS path of the file or directory"
+              }
+            ]
+          },
+          "docs": "Returns metadata and statistics for one or more files or directories."
+        },
+        {
+          "info": {
+            "name": "Check Path Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/exists",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "iRODS path to check"
+              }
+            ]
+          },
+          "docs": "Checks whether one or more paths exist in iRODS."
+        },
+        {
+          "info": {
+            "name": "Move Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves one or more files or directories to a new location in iRODS."
+        },
+        {
+          "info": {
+            "name": "Rename File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/rename",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a file or directory in iRODS."
+        },
+        {
+          "info": {
+            "name": "Delete Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves one or more files or directories to the user's trash."
+        },
+        {
+          "info": {
+            "name": "Empty Trash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/delete-contents"
+          },
+          "docs": "Permanently deletes all items in the user's trash directory."
+        },
+        {
+          "info": {
+            "name": "Search Filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/filesystem/search",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by object type"
+              }
+            ]
+          },
+          "docs": "Performs a full-text search across the iRODS data store."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

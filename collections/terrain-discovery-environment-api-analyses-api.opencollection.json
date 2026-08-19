@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Terrain Discovery Environment Analyses API",
+    "version": "2026.04"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analyses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Analyses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/analyses",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of analyses to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "sort-field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "JSON filter expression"
+              }
+            ]
+          },
+          "docs": "Lists job analyses (runs) for the current user."
+        },
+        {
+          "info": {
+            "name": "Submit Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/analyses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new analysis job for execution."
+        },
+        {
+          "info": {
+            "name": "Get Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://de.cyverse.org/terrain/secured/analyses/:analysis-id",
+            "params": [
+              {
+                "name": "analysis-id",
+                "value": "",
+                "type": "path",
+                "description": "The analysis UUID"
+              }
+            ]
+          },
+          "docs": "Returns details and status for a specific analysis job."
+        },
+        {
+          "info": {
+            "name": "Delete Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://de.cyverse.org/terrain/secured/analyses/:analysis-id",
+            "params": [
+              {
+                "name": "analysis-id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a completed analysis from the user's history."
+        },
+        {
+          "info": {
+            "name": "Stop Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://de.cyverse.org/terrain/secured/analyses/:analysis-id/stop",
+            "params": [
+              {
+                "name": "analysis-id",
+                "value": "",
+                "type": "path",
+                "description": "The analysis UUID"
+              }
+            ]
+          },
+          "docs": "Stops a running analysis job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "8b544cb6-8d5d-4867-bf1c-7cc02ba684b4",
+      "name": "Search",
+      "description": {
+        "content": "Full-text search across data and apps",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8829eda4-34fa-4579-9a99-5731e9300e1e",
+          "name": "Search Filesystem",
+          "request": {
+            "name": "Search Filesystem",
+            "description": {
+              "content": "Performs a full-text search across the iRODS data store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secured",
+                "filesystem",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "(Required) Search query string"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by object type"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3afe3f6e-b374-45f4-a113-93c99703c123",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secured",
+                    "filesystem",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"matches\": [\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 5078,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"path\": \"string\",\n      \"label\": \"string\",\n      \"date-created\": \"string\",\n      \"date-modified\": \"string\",\n      \"file-size\": 7350,\n      \"permission\": \"string\",\n      \"file-type\": \"string\"\n    }\n  ],\n  \"total\": 7004,\n  \"offset\": 1817\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://de.cyverse.org/terrain",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "452d3dc2-1d08-464e-9340-9d7775c71091",
+    "name": "Terrain Discovery Environment Analyses Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.\n\nContact Support:\n Name: CyVerse Support",
+      "type": "text/plain"
+    }
+  }
+}
