@@ -26,6 +26,13 @@ tags:
   - Life Sciences
   - Filesystem
   - Cloud Computing
+  - Open-Source
+tags_raw:
+  - Bioinformatics
+  - Data Science
+  - Life Sciences
+  - Filesystem
+  - Cloud Computing
   - Open Source
 url: https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml
 created: '2026-03-16'
@@ -54,6 +61,8 @@ apis:
   humanURL: https://cyverse.org/Science-APIs
   baseURL: https://de.cyverse.org/terrain
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -134,6 +143,8 @@ apis:
   humanURL: https://cyverse.org/Science-APIs
   baseURL: https://de.cyverse.org/terrain
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
