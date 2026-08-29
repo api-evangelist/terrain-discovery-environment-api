@@ -6,6 +6,18 @@ description: >-
   covering filesystem operations, application management, data analysis, metadata annotation, notifications, and
   persistent identifier management.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -188,6 +200,10 @@ apis:
   - type: Repository
     url: https://github.com/cyverse-de/terrain
 common:
+  - type: IssueTracker
+    url: https://github.com/cyverse-de/terrain/issues
+  - type: Releases
+    url: https://github.com/cyverse-de/terrain/releases
   - type: AgenticAccess
     url: agentic-access/terrain-discovery-environment-api-agentic-access.yml
   - type: DomainSecurity
