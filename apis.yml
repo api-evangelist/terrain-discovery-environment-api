@@ -201,6 +201,8 @@ apis:
   - type: Repository
     url: https://github.com/cyverse-de/terrain
 common:
+  - type: Website
+    url: https://www.cyverse.org/
   - type: IssueTracker
     url: https://github.com/cyverse-de/terrain/issues
   - type: Releases
