@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Terrain Discovery Environment Analyses API
   description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
@@ -128,17 +128,31 @@ paths:
           description: Analysis stopped
 components:
   schemas:
-    AnalysisList:
+    AnalysisSubmission:
       type: object
+      required:
+      - name
+      - app_id
+      - system_id
+      - config
       properties:
-        analyses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Analysis'
-        total:
-          type: integer
-        offset:
-          type: integer
+        name:
+          type: string
+          description: Name for this analysis job
+        app_id:
+          type: string
+          description: UUID of the application to run
+        system_id:
+          type: string
+          description: System to run on (de, tapis)
+        description:
+          type: string
+        config:
+          type: object
+          description: Application-specific parameter configuration
+        output_dir:
+          type: string
+          description: iRODS path for output files
     Analysis:
       type: object
       properties:
@@ -166,31 +180,17 @@ components:
           type: string
         result_folder_path:
           type: string
-    AnalysisSubmission:
+    AnalysisList:
       type: object
-      required:
-      - name
-      - app_id
-      - system_id
-      - config
       properties:
-        name:
-          type: string
-          description: Name for this analysis job
-        app_id:
-          type: string
-          description: UUID of the application to run
-        system_id:
-          type: string
-          description: System to run on (de, tapis)
-        description:
-          type: string
-        config:
-          type: object
-          description: Application-specific parameter configuration
-        output_dir:
-          type: string
-          description: iRODS path for output files
+        analyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Analysis'
+        total:
+          type: integer
+        offset:
+          type: integer
   securitySchemes:
     KeycloakBearer:
       type: http

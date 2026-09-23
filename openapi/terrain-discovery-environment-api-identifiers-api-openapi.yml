@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Terrain Discovery Environment Analyses Identifiers API
+  title: Terrain Discovery Environment Identifiers API
   description: Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench for life sciences. Terrain validates user authentication via Keycloak JWT tokens and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
   version: '2026.04'
   contact:
@@ -54,6 +54,21 @@ paths:
                 $ref: '#/components/schemas/PermanentIdRequestResponse'
 components:
   schemas:
+    PermanentIdRequest:
+      type: object
+      required:
+      - path
+      - type
+      properties:
+        path:
+          type: string
+          description: iRODS path of the dataset to assign an identifier
+        type:
+          type: string
+          enum:
+          - ARK
+          - DOI
+          description: Type of permanent identifier to request
     PermanentIdRequestResponse:
       type: object
       properties:
@@ -76,21 +91,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PermanentIdRequestResponse'
-    PermanentIdRequest:
-      type: object
-      required:
-      - path
-      - type
-      properties:
-        path:
-          type: string
-          description: iRODS path of the dataset to assign an identifier
-        type:
-          type: string
-          enum:
-          - ARK
-          - DOI
-          description: Type of permanent identifier to request
   securitySchemes:
     KeycloakBearer:
       type: http

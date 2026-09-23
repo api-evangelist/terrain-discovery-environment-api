@@ -1,15 +1,7 @@
 {
   "provider": "terrain-discovery-environment-api",
   "sources": [
-    "terrain-discovery-environment-api-analyses-api-openapi.yml",
-    "terrain-discovery-environment-api-apps-api-openapi.yml",
-    "terrain-discovery-environment-api-authentication-api-openapi.yml",
-    "terrain-discovery-environment-api-filesystem-api-openapi.yml",
-    "terrain-discovery-environment-api-identifiers-api-openapi.yml",
-    "terrain-discovery-environment-api-metadata-api-openapi.yml",
-    "terrain-discovery-environment-api-notifications-api-openapi.yml",
-    "terrain-discovery-environment-api-search-api-openapi.yml",
-    "terrain-discovery-environment-api-sharing-api-openapi.yml"
+    "_original/terrain-openapi.yml"
   ],
   "outputs": [
     "terrain-discovery-environment-api-analyses-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "terrain-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "terrain-discovery-environment-api-analyses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-filesystem-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-identifiers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "terrain-discovery-environment-api-sharing-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
