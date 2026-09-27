@@ -104,6 +104,17 @@ paths:
                 $ref: '#/components/schemas/AppCategoryList'
 components:
   schemas:
+    AppList:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        total:
+          type: integer
+        offset:
+          type: integer
     App:
       type: object
       properties:
@@ -143,17 +154,6 @@ components:
                 type: string
               app_count:
                 type: integer
-    AppList:
-      type: object
-      properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-        total:
-          type: integer
-        offset:
-          type: integer
   securitySchemes:
     KeycloakBearer:
       type: http

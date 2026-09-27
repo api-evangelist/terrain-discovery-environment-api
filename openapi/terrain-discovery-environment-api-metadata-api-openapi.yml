@@ -57,6 +57,27 @@ paths:
           description: Metadata set
 components:
   schemas:
+    AVU:
+      type: object
+      properties:
+        attr:
+          type: string
+          description: Attribute name
+        value:
+          type: string
+          description: Attribute value
+        unit:
+          type: string
+          description: Optional unit
+    MetadataSetRequest:
+      type: object
+      properties:
+        path:
+          type: string
+        avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
     MetadataResponse:
       type: object
       properties:
@@ -70,27 +91,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AVU'
-    MetadataSetRequest:
-      type: object
-      properties:
-        path:
-          type: string
-        avus:
-          type: array
-          items:
-            $ref: '#/components/schemas/AVU'
-    AVU:
-      type: object
-      properties:
-        attr:
-          type: string
-          description: Attribute name
-        value:
-          type: string
-          description: Attribute value
-        unit:
-          type: string
-          description: Optional unit
   securitySchemes:
     KeycloakBearer:
       type: http

@@ -54,21 +54,6 @@ paths:
                 $ref: '#/components/schemas/PermanentIdRequestResponse'
 components:
   schemas:
-    PermanentIdRequest:
-      type: object
-      required:
-      - path
-      - type
-      properties:
-        path:
-          type: string
-          description: iRODS path of the dataset to assign an identifier
-        type:
-          type: string
-          enum:
-          - ARK
-          - DOI
-          description: Type of permanent identifier to request
     PermanentIdRequestResponse:
       type: object
       properties:
@@ -84,6 +69,21 @@ components:
           type: string
         status:
           type: string
+    PermanentIdRequest:
+      type: object
+      required:
+      - path
+      - type
+      properties:
+        path:
+          type: string
+          description: iRODS path of the dataset to assign an identifier
+        type:
+          type: string
+          enum:
+          - ARK
+          - DOI
+          description: Type of permanent identifier to request
     PermanentIdRequestList:
       type: object
       properties:

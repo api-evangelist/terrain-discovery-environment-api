@@ -8,6 +8,9 @@ description: >-
 type: Index
 deliveryModel:
   model: unknown
+  license_evidence:
+    not_product:
+    - cyverse-de/terrain
   open_source: unknown
   commercial: false
   callable_host: true
@@ -15,8 +18,8 @@ deliveryModel:
   confidence: low
   source:
   - openapi
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -39,7 +42,7 @@ tags:
   - Life Sciences
   - Filesystem
   - Cloud Computing
-  - Open-Source
+  - Open Source
 tags_raw:
   - Bioinformatics
   - Data Science
@@ -47,6 +50,7 @@ tags_raw:
   - Filesystem
   - Cloud Computing
   - Open Source
+  - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml
 created: '2026-03-16'
 modified: '2026-05-19'
