@@ -128,6 +128,42 @@ paths:
           description: Analysis stopped
 components:
   schemas:
+    AnalysisSubmission:
+      type: object
+      required:
+      - name
+      - app_id
+      - system_id
+      - config
+      properties:
+        name:
+          type: string
+          description: Name for this analysis job
+        app_id:
+          type: string
+          description: UUID of the application to run
+        system_id:
+          type: string
+          description: System to run on (de, tapis)
+        description:
+          type: string
+        config:
+          type: object
+          description: Application-specific parameter configuration
+        output_dir:
+          type: string
+          description: iRODS path for output files
+    AnalysisList:
+      type: object
+      properties:
+        analyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Analysis'
+        total:
+          type: integer
+        offset:
+          type: integer
     Analysis:
       type: object
       properties:
@@ -155,42 +191,6 @@ components:
           type: string
         result_folder_path:
           type: string
-    AnalysisList:
-      type: object
-      properties:
-        analyses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Analysis'
-        total:
-          type: integer
-        offset:
-          type: integer
-    AnalysisSubmission:
-      type: object
-      required:
-      - name
-      - app_id
-      - system_id
-      - config
-      properties:
-        name:
-          type: string
-          description: Name for this analysis job
-        app_id:
-          type: string
-          description: UUID of the application to run
-        system_id:
-          type: string
-          description: System to run on (de, tapis)
-        description:
-          type: string
-        config:
-          type: object
-          description: Application-specific parameter configuration
-        output_dir:
-          type: string
-          description: iRODS path for output files
   securitySchemes:
     KeycloakBearer:
       type: http

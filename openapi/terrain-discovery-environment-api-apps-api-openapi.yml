@@ -104,17 +104,6 @@ paths:
                 $ref: '#/components/schemas/AppCategoryList'
 components:
   schemas:
-    AppList:
-      type: object
-      properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-        total:
-          type: integer
-        offset:
-          type: integer
     App:
       type: object
       properties:
@@ -140,6 +129,17 @@ components:
           type: boolean
         pipeline_eligibility:
           type: object
+    AppList:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        total:
+          type: integer
+        offset:
+          type: integer
     AppCategoryList:
       type: object
       properties:

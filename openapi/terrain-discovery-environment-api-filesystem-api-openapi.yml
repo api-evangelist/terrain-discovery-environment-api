@@ -253,6 +253,53 @@ paths:
                 $ref: '#/components/schemas/SearchResults'
 components:
   schemas:
+    RenameRequest:
+      type: object
+      required:
+      - source
+      - dest
+      properties:
+        source:
+          type: string
+          description: Current path
+        dest:
+          type: string
+          description: New path or name
+    RootListing:
+      type: object
+      properties:
+        roots:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+    DeleteResponse:
+      type: object
+      properties:
+        paths:
+          type: array
+          items:
+            type: string
+    DirectoryListing:
+      type: object
+      properties:
+        path:
+          type: string
+        date-created:
+          type: string
+        date-modified:
+          type: string
+        permission:
+          type: string
+        folders:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileSystemObject'
+        total:
+          type: integer
     MoveRequest:
       type: object
       required:
@@ -267,20 +314,14 @@ components:
         dest:
           type: string
           description: Destination directory path
-    DeleteResponse:
+    CreateDirectoryRequest:
       type: object
+      required:
+      - path
       properties:
-        paths:
-          type: array
-          items:
-            type: string
-    PathExistence:
-      type: object
-      properties:
-        paths:
-          type: object
-          additionalProperties:
-            type: boolean
+        path:
+          type: string
+          description: Full iRODS path for the new directory
     SearchResults:
       type: object
       properties:
@@ -292,16 +333,6 @@ components:
           type: integer
         offset:
           type: integer
-    DeleteRequest:
-      type: object
-      required:
-      - paths
-      properties:
-        paths:
-          type: array
-          items:
-            type: string
-          description: List of paths to delete
     FileSystemObject:
       type: object
       properties:
@@ -330,26 +361,16 @@ components:
             type: string
         dest:
           type: string
-    CreateDirectoryRequest:
+    DeleteRequest:
       type: object
       required:
-      - path
+      - paths
       properties:
-        path:
-          type: string
-          description: Full iRODS path for the new directory
-    RenameRequest:
-      type: object
-      required:
-      - source
-      - dest
-      properties:
-        source:
-          type: string
-          description: Current path
-        dest:
-          type: string
-          description: New path or name
+        paths:
+          type: array
+          items:
+            type: string
+          description: List of paths to delete
     FileStats:
       type: object
       properties:
@@ -368,34 +389,13 @@ components:
           type: string
         file-size:
           type: integer
-    DirectoryListing:
+    PathExistence:
       type: object
       properties:
-        path:
-          type: string
-        date-created:
-          type: string
-        date-modified:
-          type: string
-        permission:
-          type: string
-        folders:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileSystemObject'
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileSystemObject'
-        total:
-          type: integer
-    RootListing:
-      type: object
-      properties:
-        roots:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileSystemObject'
+        paths:
+          type: object
+          additionalProperties:
+            type: boolean
   securitySchemes:
     KeycloakBearer:
       type: http

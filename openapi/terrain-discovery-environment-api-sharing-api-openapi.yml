@@ -57,6 +57,13 @@ paths:
           description: Unsharing completed
 components:
   schemas:
+    ShareResponse:
+      type: object
+      properties:
+        sharing:
+          type: array
+          items:
+            type: object
     UnshareRequest:
       type: object
       properties:
@@ -94,13 +101,6 @@ components:
                       - read
                       - write
                       - own
-    ShareResponse:
-      type: object
-      properties:
-        sharing:
-          type: array
-          items:
-            type: object
   securitySchemes:
     KeycloakBearer:
       type: http

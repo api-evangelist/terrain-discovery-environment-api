@@ -54,21 +54,6 @@ paths:
                 $ref: '#/components/schemas/PermanentIdRequestResponse'
 components:
   schemas:
-    PermanentIdRequestResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        path:
-          type: string
-        type:
-          type: string
-        requested_by:
-          type: string
-        date_submitted:
-          type: string
-        status:
-          type: string
     PermanentIdRequest:
       type: object
       required:
@@ -91,6 +76,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PermanentIdRequestResponse'
+    PermanentIdRequestResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+        requested_by:
+          type: string
+        date_submitted:
+          type: string
+        status:
+          type: string
   securitySchemes:
     KeycloakBearer:
       type: http
