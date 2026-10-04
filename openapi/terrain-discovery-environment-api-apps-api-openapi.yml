@@ -104,6 +104,31 @@ paths:
                 $ref: '#/components/schemas/AppCategoryList'
 components:
   schemas:
+    AppCategoryList:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              app_count:
+                type: integer
+    AppList:
+      type: object
+      properties:
+        apps:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        total:
+          type: integer
+        offset:
+          type: integer
     App:
       type: object
       properties:
@@ -129,31 +154,6 @@ components:
           type: boolean
         pipeline_eligibility:
           type: object
-    AppList:
-      type: object
-      properties:
-        apps:
-          type: array
-          items:
-            $ref: '#/components/schemas/App'
-        total:
-          type: integer
-        offset:
-          type: integer
-    AppCategoryList:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              app_count:
-                type: integer
   securitySchemes:
     KeycloakBearer:
       type: http

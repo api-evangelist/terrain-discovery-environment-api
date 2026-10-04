@@ -57,13 +57,6 @@ paths:
           description: Unsharing completed
 components:
   schemas:
-    ShareResponse:
-      type: object
-      properties:
-        sharing:
-          type: array
-          items:
-            type: object
     UnshareRequest:
       type: object
       properties:
@@ -78,6 +71,13 @@ components:
                 type: array
                 items:
                   type: string
+    ShareResponse:
+      type: object
+      properties:
+        sharing:
+          type: array
+          items:
+            type: object
     ShareRequest:
       type: object
       properties:
