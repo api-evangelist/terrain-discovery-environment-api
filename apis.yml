@@ -53,7 +53,7 @@ tags_raw:
   - Open-Source
 url: https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-05-19'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: terrain-discovery-environment-api:terrain-discovery-environment-api-analyses-api
@@ -205,6 +205,8 @@ apis:
   - type: Repository
     url: https://github.com/cyverse-de/terrain
 common:
+  - url: https://cyverse.org/news
+    type: Blog
   - type: Website
     url: https://www.cyverse.org/
   - type: IssueTracker
