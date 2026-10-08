@@ -205,6 +205,12 @@ apis:
   - type: Repository
     url: https://github.com/cyverse-de/terrain
 common:
+  - type: Plans
+    url: plans/terrain-discovery-environment-api-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/terrain-discovery-environment-api-rate-limits.yml
+  - type: FinOps
+    url: finops/terrain-discovery-environment-api-finops.yml
   - url: https://cyverse.org/news
     type: Blog
   - type: Website
