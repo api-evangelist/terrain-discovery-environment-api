@@ -57,19 +57,6 @@ paths:
           description: Metadata set
 components:
   schemas:
-    MetadataResponse:
-      type: object
-      properties:
-        path:
-          type: string
-        avus:
-          type: array
-          items:
-            $ref: '#/components/schemas/AVU'
-        irods-avus:
-          type: array
-          items:
-            $ref: '#/components/schemas/AVU'
     AVU:
       type: object
       properties:
@@ -88,6 +75,19 @@ components:
         path:
           type: string
         avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+    MetadataResponse:
+      type: object
+      properties:
+        path:
+          type: string
+        avus:
+          type: array
+          items:
+            $ref: '#/components/schemas/AVU'
+        irods-avus:
           type: array
           items:
             $ref: '#/components/schemas/AVU'

@@ -54,21 +54,13 @@ paths:
                 $ref: '#/components/schemas/PermanentIdRequestResponse'
 components:
   schemas:
-    PermanentIdRequestResponse:
+    PermanentIdRequestList:
       type: object
       properties:
-        id:
-          type: string
-        path:
-          type: string
-        type:
-          type: string
-        requested_by:
-          type: string
-        date_submitted:
-          type: string
-        status:
-          type: string
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermanentIdRequestResponse'
     PermanentIdRequest:
       type: object
       required:
@@ -84,13 +76,21 @@ components:
           - ARK
           - DOI
           description: Type of permanent identifier to request
-    PermanentIdRequestList:
+    PermanentIdRequestResponse:
       type: object
       properties:
-        requests:
-          type: array
-          items:
-            $ref: '#/components/schemas/PermanentIdRequestResponse'
+        id:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+        requested_by:
+          type: string
+        date_submitted:
+          type: string
+        status:
+          type: string
   securitySchemes:
     KeycloakBearer:
       type: http
