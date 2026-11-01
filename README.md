@@ -1,4 +1,4 @@
-# Terrain Discovery Environment API (terrain-discovery-environment-api)
+# Terrain Discovery Environment API
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,62 +66,168 @@
 
 Terrain is the primary REST API gateway for CyVerse's Discovery Environment (DE), an open-source data science workbench. Terrain validates user authentication via Keycloak/JWT and orchestrates calls to backend microservices covering filesystem operations, application management, data analysis, metadata annotation, notifications, and persistent identifier management.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/apis.yml)
+**Areas:** Bioinformatics · Data Science · Life Sciences · Filesystem · Cloud Computing · Open Source
 
-## Scope
+## Terrain Discovery Environment API on APIs.io
 
-- **Type:** Index
+Everything profiled for Terrain Discovery Environment API is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/terrain-discovery-environment-api/](https://apis.io/providers/terrain-discovery-environment-api/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (9)
 
-- Bioinformatics
-- Data Science
-- Life Sciences
-- Filesystem
-- Cloud Computing
-- Open Source
+- [Terrain Discovery Environment API Analyses API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-analyses-api/) — Job submission, monitoring, and management
+- [Terrain Discovery Environment API Apps API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-apps-api/) — Application metadata, discovery, and management
+- [Terrain Discovery Environment API Authentication API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-authentication-api/) — Token and authentication management
+- [Terrain Discovery Environment API Filesystem API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-filesystem-api/) — iRODS filesystem operations - browse, create, move, delete files and directories
+- [Terrain Discovery Environment API Identifiers API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-identifiers-api/) — Permanent identifier (DOI) requests
+- [Terrain Discovery Environment API Metadata API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-metadata-api/) — File and data metadata annotation
+- [Terrain Discovery Environment API Notifications API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-notifications-api/) — User notification management
+- [Terrain Discovery Environment API Search API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-search-api/) — Full-text search across data and apps
+- [Terrain Discovery Environment API Sharing API](https://apis.io/apis/terrain-discovery-environment-api/terrain-discovery-environment-api-sharing-api/) — Data sharing and permissions
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Terrain API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Terrain API is the main entry-point REST service for the CyVerse Discovery Environment. It handles authentication via Keycloak JWT tokens and orchestrates calls to backend services for filesystem management, app execution, data analysis, metadata, notifications, and more.
+- [Terrain Discovery Environment Api Agentic Access](https://apis.io/agentic-access/terrain-discovery-environment-api/terrain-discovery-environment-api-agentic-access/)
 
-- **Human URL:** [https://cyverse.org/Science-APIs](https://cyverse.org/Science-APIs)
-- **Base URL:** `https://de.cyverse.org/terrain`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Bioinformatics
-- Filesystem
-- Data Analysis
-- Applications
-- Notifications
+- [Terrain Analysis](https://apis.io/schemas/terrain-discovery-environment-api/terrain-analysis/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.cyverse.org/services/api_overview/)
-- [Swagger U I](https://de.cyverse.org/terrain/docs)
-- [Repository](https://github.com/cyverse-de/terrain)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/terrain-discovery-environment-api/refs/heads/main/openapi/terrain-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/terrain.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/terrain.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Terrain Filesystem Structure](https://apis.io/json-structure/terrain-discovery-environment-api/terrain-filesystem-structure/)
 
-- [Portal](https://cyverse.org/Science-APIs)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Terrain Discovery Environment Api Context](https://apis.io/jsonld/terrain-discovery-environment-api/terrain-discovery-environment-api-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Terrain Discovery Environment Vocabulary](https://apis.io/vocabularies/terrain-discovery-environment-api/terrain-vocabulary/)
+
+#### Examples (1)
+
+Example requests and responses.
+
+- [Terrain List Directory Example](https://apis.io/examples/terrain-discovery-environment-api/terrain-list-directory-example/)
+
+#### Collections (10)
+
+Postman and Open Collection request collections.
+
+- [Terrain Discovery Environment API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain/)
+- [Terrain Discovery Environment Analyses API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-analyses-api/)
+- [Terrain Discovery Environment Analyses Apps API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-apps-api/)
+- [Terrain Discovery Environment Analyses Authentication API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-authentication-api/)
+- [Terrain Discovery Environment Analyses Filesystem API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-filesystem-api/)
+- [Terrain Discovery Environment Analyses Identifiers API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-identifiers-api/)
+- [Terrain Discovery Environment Analyses Metadata API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-metadata-api/)
+- [Terrain Discovery Environment Analyses Notifications API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-notifications-api/)
+- [Terrain Discovery Environment Analyses Search API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-search-api/)
+- [Terrain Discovery Environment Analyses Sharing API](https://apis.io/collections/terrain-discovery-environment-api/open-terrain-discovery-environment-api-sharing-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Terrain Discovery Environment API — jsonschema rules](https://apis.io/rules/terrain-discovery-environment-api/terrain-discovery-environment-api-jsonschema-spectral-rules/)
+- [Terrain Discovery Environment API — terrain rules](https://apis.io/rules/terrain-discovery-environment-api/terrain-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Terrain Discovery Environment Api Authentication](https://apis.io/security/terrain-discovery-environment-api/terrain-discovery-environment-api-authentication/)
+- [Terrain Discovery Environment Api Domain Security](https://apis.io/security/terrain-discovery-environment-api/terrain-discovery-environment-api-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Terrain Discovery Environment Api Plans Pricing](https://apis.io/plans/terrain-discovery-environment-api/terrain-discovery-environment-api-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Terrain Discovery Environment Api Rate Limits](https://apis.io/rate-limits/terrain-discovery-environment-api/terrain-discovery-environment-api-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Terrain Discovery Environment Api Finops](https://apis.io/finops/terrain-discovery-environment-api/terrain-discovery-environment-api-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.cyverse.org/)
 - [Documentation](https://docs.cyverse.org)
-- [Repository](https://github.com/cyverse-de/terrain)
-- [Portal](https://de.cyverse.org)
-- [Webinar](https://cyverse.org/webinar_TerrainAPI)
-- [Authentication](https://docs.cyverse.org/services/getting_started/)
+- [Blog](https://cyverse.org/news)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.6 |
+| Contract governance | 13.6 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 13.3** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/terrain-discovery-environment-api/](https://apis.io/providers/terrain-discovery-environment-api/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Terrain Discovery Environment API: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/terrain-discovery-environment-api/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
